@@ -4,10 +4,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-defer-options',
     standalone: true,
-    imports: 
-    [
-        CommonModule,
-    ],
+    imports: [CommonModule,],
     templateUrl: './defer-options.component.html',
     styles: ``
 })

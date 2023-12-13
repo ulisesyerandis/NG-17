@@ -4,10 +4,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-view-transition',
     standalone: true,
-    imports: 
-    [
-        CommonModule,
-    ],
+    imports: [CommonModule,],
     templateUrl: './view-transition.component.html',
     styles: ``
   })
