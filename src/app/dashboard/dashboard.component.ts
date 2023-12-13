@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SidemenuComponent } from '../shared/sidemenu/sidemenu.component';
+import { SidemenuComponent } from '@shared/sidemenu/sidemenu.component';    //  alias created in tsconfig.json(@shared)
 
 @Component({
     selector: 'app-dashboard',
