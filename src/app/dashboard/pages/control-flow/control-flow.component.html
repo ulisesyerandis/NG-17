@@ -1,1 +1,61 @@
-<p>control-flow works!</p>,
+<section 
+    class="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <!-- ngInf @if -->
+        <div 
+        class="bg-white rounded shadow p-10">
+            <h2 
+            class="text-2xl font-bold mb-5"
+            >
+                if: {{showContent()}}
+            </h2>
+            <button 
+            class="p-2 bg-blue-500 rounded text-white"
+            (click)="toggleContent()"
+            >
+                Click me!
+            </button>
+            @if (showContent()) 
+            {
+                <h1 
+                class="text-2x1 font-bold mb-5"
+                >    
+                    Hello World
+                </h1>
+            }@else 
+            {
+                <h1
+                class="text-2x1 font-bold mb-5"
+                >
+                    False here
+                </h1>
+            }
+        </div>
+ <!-- @switch -->
+        <div 
+        class="bg-white rounded shadow p-10"
+        >  
+        <h2 
+        class="text-3x1"
+        >
+            {{grades()}}
+        </h2>
+            @switch (grades()) 
+            {
+                @case ('A') 
+                {
+                    <p>  5 ptos</p>
+                }
+                @case ('B') 
+                {
+                     <p> >3 ptos</p>
+                }
+                @default
+                {
+                    <p>  2 ptos</p>
+                }
+            }
+        </div>
+</section>
+
+  
+   
