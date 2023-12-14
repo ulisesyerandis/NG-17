@@ -1,18 +1,18 @@
 <app-title title="Student List"></app-title>
-<button
+ <button
     class="p-2 bg-blue-500 rounded text-white"
-    
+    (click)="FillStudentData()"
 > 
     Show student list
 </button>
-@if (showContent()) 
+<!-- @if (showContent()) 
 {
     <h1>hola</h1>
 }
 @else 
 {
     <h1>adios</h1>
-}
+}  -->
 <!-- <div class="text-2x1 bg-blue-100 mb-5">
     @for (student of student; track $index) 
     {
@@ -40,4 +40,13 @@
    <h1>{{student}}</h1>
 </div> -->
 
+
+    @for (student of student; track student.id) 
+    { 
+        <ul>
+            <li>
+                <h1>{{student.id}} - {{student.name}}</h1>
+            </li>
+        </ul> 
+    }
  

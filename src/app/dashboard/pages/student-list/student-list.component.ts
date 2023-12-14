@@ -16,12 +16,11 @@ export default class StudentListComponent
   student: any;
   public studentListService = inject(StudentListService);
   public showContent = signal(false);
-  // studentListService: any;
   
 public constructor()
 {}
 
-public FillStudentData(): void {
+public FillStudentData(): [] {
   this.studentListService.getAllStudent().subscribe({
       next: (response: any) => {
           this.student = response;
@@ -31,6 +30,7 @@ public FillStudentData(): void {
           console.log(error)
       },
   });
+  return this.student;
 }
 
 public toggleContent() 

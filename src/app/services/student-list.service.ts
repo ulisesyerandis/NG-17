@@ -13,6 +13,12 @@ export class StudentListService
 
   public getAllStudent()
   {
-    return this.http.get('http://localhost:8000/student');
+    const student = this.http.get('http://localhost:8000/student');
+    return student;
   }
+  
+  // public getStudent(id: number)
+  // {
+  //   return this.http.get('http://localhost:8000/student');
+  // }
 }
