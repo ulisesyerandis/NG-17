@@ -1,1 +1,43 @@
-<p>student-list works!</p>
+<app-title title="Student List"></app-title>
+<button
+    class="p-2 bg-blue-500 rounded text-white"
+    
+> 
+    Show student list
+</button>
+@if (showContent()) 
+{
+    <h1>hola</h1>
+}
+@else 
+{
+    <h1>adios</h1>
+}
+<!-- <div class="text-2x1 bg-blue-100 mb-5">
+    @for (student of student; track $index) 
+    {
+        <h1> {{$index}} - {{student.name}}</h1>
+    }
+</div> -->
+<!-- <div
+    class="text-2x1 bg-blue-100 mb-3 rounded shadow p-10"
+>
+    <ul>
+    <li *ngFor="let student of student">
+      <span>{{ student.name }}</span>
+    </li>
+  </ul>
+
+  @for (student of student; track $index) 
+  {
+    <ul>
+        <li>
+            <span>{{student.name}}</span>
+        </li>
+    </ul>
+  }
+   <h1>hello World</h1>
+   <h1>{{student}}</h1>
+</div> -->
+
+ 

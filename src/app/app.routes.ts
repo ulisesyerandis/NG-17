@@ -28,6 +28,16 @@ export const routes: Routes =
                 loadComponent: () => import('./dashboard/pages/defer-views/defer-views.component')
             },
             {
+                path:'student/:id',
+                title:'Student',
+                loadComponent: () => import('./dashboard/pages/student/student.component')
+            },
+            {
+                path:'student-list',
+                title:'Student List',
+                loadComponent: () => import('./dashboard/pages/student-list/student-list.component')
+            },
+            {
                 path:'user/:id',
                 title:'User',
                 loadComponent: () => import('./dashboard/pages/user/user.component')
