@@ -20,7 +20,8 @@ export default class StudentListComponent
 public constructor()
 {}
 
-public FillStudentData(): [] {
+public FillStudentData(): void
+{
   this.studentListService.getAllStudent().subscribe({
       next: (response: any) => {
           this.student = response;
@@ -30,7 +31,7 @@ public FillStudentData(): [] {
           console.log(error)
       },
   });
-  return this.student;
+  console.log(this.student + ' cant');
 }
 
 public toggleContent() 

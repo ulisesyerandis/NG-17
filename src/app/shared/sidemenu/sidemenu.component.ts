@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { routes } from '../../app.routes';
 import { RouterModule } from '@angular/router';
+import DashboardComponent from '../../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-sidemenu',
@@ -32,6 +33,6 @@ export class SidemenuComponent
     // .filter(route => route && route.path )
     // .filter(routes => routes && !routes.path?.includes(':'))
 
-    // console.log(dashboardRoutes);
+    console.log(this.menuItems);
   }
 }

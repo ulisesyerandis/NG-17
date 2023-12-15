@@ -7,14 +7,18 @@ import { Injectable, inject } from '@angular/core';
 export class StudentListService 
 {
   private http = inject(HttpClient);
-
+  
   constructor() 
-  { }
+  { 
+    console.log('cargando');
+    // console.log(this.getAllStudent().forEach.length);
+    
+  }
 
   public getAllStudent()
   {
-    const student = this.http.get('http://localhost:8000/student');
-    return student;
+    console.log(this.http.get('http://localhost:8000/student'))
+    return this.http.get('http://localhost:8000/student');
   }
   
   // public getStudent(id: number)
