@@ -20,7 +20,7 @@ export class SidemenuComponent
     .map( routes => routes.children ?? [])
     .flat()
     .filter(route => route && route.path )
-    .filter(routes => routes && !routes.path?.includes(':'))
+    // .filter(routes => routes && !routes.path?.includes(':'))
 
   constructor ()
   { 

@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-user',
+    selector: 'app-find-student',
     standalone: true,
     imports: [CommonModule,],
-    templateUrl: './user.component.html',
+    templateUrl: './find-student.component.html',
     styles: ``
 })
 export default class UserComponent 

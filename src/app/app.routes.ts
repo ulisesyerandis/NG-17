@@ -7,29 +7,30 @@ export const routes: Routes =
         loadComponent: ()=> import( './dashboard/dashboard.component' ),
         children:
         [
+            
             {
-                path:'change-detection',
-                title:'Change Detection',
-                loadComponent: () => import('./dashboard/pages/change-detection/change-detection.component'),
+                path:'main-view',
+                title:'Welcome to the University',
+                loadComponent: () => import('./dashboard/pages/main-view/main-view.component')
             },
-            {
-                path:'control-flow',
-                title:'Control Flow',
-                loadComponent: () => import('./dashboard/pages/control-flow/control-flow.component')
-            },
-            {
-                path:'defer-options',
-                title:'Defer Options',
-                loadComponent: () => import('./dashboard/pages/defer-options/defer-options.component')
-            },
-            {
-                path:'defer-views',
-                title:'Defer Views',
-                loadComponent: () => import('./dashboard/pages/defer-views/defer-views.component')
-            },
+            // {
+            //     path:'change-detection',
+            //     title:'Change Detection',
+            //     loadComponent: () => import('./dashboard/pages/change-detection/change-detection.component'),
+            // },
+            // {
+            //     path:'defer-options',
+            //     title:'Defer Options',
+            //     loadComponent: () => import('./dashboard/pages/defer-options/defer-options.component')
+            // },
+            // {
+            //     path:'defer-views',
+            //     title:'Defer Views',
+            //     loadComponent: () => import('./dashboard/pages/defer-views/defer-views.component')
+            // },
             {
                 path:'student/:id',
-                title:'Student',
+                title:'Add Student',
                 loadComponent: () => import('./dashboard/pages/student/student.component')
             },
             {
@@ -38,23 +39,23 @@ export const routes: Routes =
                 loadComponent: () => import('./dashboard/pages/student-list/student-list.component')
             },
             {
-                path:'user/:id',
-                title:'User',
-                loadComponent: () => import('./dashboard/pages/user/user.component')
+                path:'find-student',
+                title:'Find Student',
+                loadComponent: () => import('./dashboard/pages/find-student/find-student.component')
             },
-            {
-                path:'user-list',
-                title:'User List',
-                loadComponent: () => import('./dashboard/pages/usersList/usersList.component')
-            },
-            {
-                path:'view-transition',
-                title:'View Transition',
-                loadComponent: () => import('./dashboard/pages/view-transition/view-transition.component')
-            },
+            // {
+            //     path:'user-list',
+            //     title:'User List',
+            //     loadComponent: () => import('./dashboard/pages/usersList/usersList.component')
+            // },
+            // {
+            //     path:'view-transition',
+            //     title:'View Transition',
+            //     loadComponent: () => import('./dashboard/pages/view-transition/view-transition.component')
+            // },
             {
                 path:'',
-                redirectTo:'control-flow',
+                redirectTo:'main-view',
                 pathMatch:'full',
             }
         ]

@@ -8,7 +8,7 @@
  </button>
 @if (showContent()) 
 {
-    <ul>
+    <!-- <ul>
         @for (student of studentListService.student; track student.id) 
         {
             <li>
@@ -19,6 +19,22 @@
                 </a> 
             </li>
         }
-    </ul>
+    </ul> -->
+
+   
+ 
+    <table border="1px solid black"
+        class="studentTabl"
+    >
+        <tr  class="cellTable"
+        >
+          <th class="headerTable">ID</th>
+          <th class="headerTable">Name</th>
+        </tr>
+        <tr *ngFor="let student of studentListService.student">           
+          <td class="cellTable">{{ student.id }} - </td>
+          <td class="cellTable">{{ student.name }}</td>
+        </tr>
+      </table>
 }
  
