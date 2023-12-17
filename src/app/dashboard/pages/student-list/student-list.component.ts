@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 })
 export default class StudentListComponent 
 {
+
   student: any;
   public studentListService = inject(StudentListService)
   public showContent = signal(false)

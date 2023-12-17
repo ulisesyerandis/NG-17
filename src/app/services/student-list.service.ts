@@ -8,17 +8,17 @@ import axios from 'axios';
 export class StudentListService 
 {
   private http = inject(HttpClient);
-  student: any;
+  // student: any;
   
   constructor() 
   { 
     console.log('cargando');
     // console.log(this.getAllStudent().forEach.length);
-    this.http.get('http://localhost:8000/student')
-    .subscribe(res =>{
-      this.student = res;
-      console.log('studentList service')
-    })
+    // this.http.get('http://localhost:8000/student')
+    // .subscribe(res =>{
+    //   this.student = res;
+    //   console.log('studentList service')
+    // })
   }
 
   public getAllStudent()
