@@ -1,34 +1,18 @@
 <app-title title="Student List"></app-title>
- <button
+<section class="sect-studentList"> 
+  <button type="button"
     class="p-2 bg-blue-500 rounded text-white"
     id="bttn"
-    (click)="FillStudentData()"
- > 
-   <h1>show student list</h1>
- </button>
-@if (showContent()) 
-{
-    <!-- <ul>
-        @for (student of studentListService.student; track student.id) 
-        {
-            <li>
-                <a [routerLink]="['/dashboard/student', student.id]" 
-                class="mx-5 hover:underline"
-                >
-                    {{student.name}}
-                </a> 
-            </li>
-        }
-    </ul> -->
+    (click)="openAddStudentWindow()"
+  > 
+     <h1>Add student</h1>
+   </button>
 
-   
- 
     <table border="1px solid black"
         class="studentTabl"
     >
-        <tr  class="cellTable"
-        >
-          <th class="headerTable">ID</th>
+        <tr  class="cellTable">
+          <th class="headerTable">Id</th>
           <th class="headerTable">Name</th>
         </tr>
         <tr *ngFor="let student of student">           
@@ -36,5 +20,12 @@
           <td class="cellTable">{{ student.name }}</td>
         </tr>
       </table>
+
+ <!-- ///////////////////////////////////////////////// -->
+<script>
+  function openAddStudentWindow() 
+{
+   window.open([routerLink="item"], "Add Student", "width=500,height=300");
 }
- 
+</script>
+</section>

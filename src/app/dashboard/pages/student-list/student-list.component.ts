@@ -1,26 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { TitleComponent } from '@shared/title/title.component';
 import { StudentListService } from '../../../services/student-list.service';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import FormComponent from '../form/form.component';
+import { routes } from '../../../app.routes';
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [CommonModule, TitleComponent, RouterModule],
+  imports: [CommonModule, TitleComponent, RouterModule,],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
-export default class StudentListComponent 
+export default class StudentListComponent implements OnInit
 {
+  public studentListService = inject(StudentListService)
 
   student: any;
-  public studentListService = inject(StudentListService)
   public showContent = signal(false)
+  public items = routes.filter(route => route.path?.includes('form'))
   
 public constructor()
 {}
+  ngOnInit(): void {
+    this.FillStudentData();
+  }
 
 public FillStudentData(): void
 {
@@ -29,7 +34,7 @@ public FillStudentData(): void
           this.student = response;
           console.log("Hello world");
       },
-      error: (error: any) => {
+      error: (error: any) => {   
           // console.log(error)
       },
   });
@@ -37,11 +42,11 @@ public FillStudentData(): void
   this.showContent.update(value => !value);
 }
 
-// public toggleContent() 
-//     {
-//         this.showContent.update(value => !value);  
-//     }
-
+public openAddStudentWindow() 
+{
+  console.log(this.items.toString())
+   window.open(this.items.toString(), "Add Student", "width=500,height=300");
+}
 }
 
 

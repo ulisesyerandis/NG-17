@@ -2,7 +2,9 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = 
 [
+    
      {
+        
         path: 'dashboard',
         loadComponent: ()=> import( './dashboard/dashboard.component' ),
         children:
@@ -36,7 +38,7 @@ export const routes: Routes =
             {
                 path:'student-list',
                 title:'Student List',
-                loadComponent: () => import('./dashboard/pages/student-list/student-list.component')
+                loadComponent: () => import('./dashboard/pages/student-list/student-list.component'),
             },
             {
                 path:'find-student',
@@ -53,6 +55,11 @@ export const routes: Routes =
             //     title:'View Transition',
             //     loadComponent: () => import('./dashboard/pages/view-transition/view-transition.component')
             // },
+            {        
+                path: 'form',
+                title:'form',
+                loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+             },
             {
                 path:'',
                 redirectTo:'main-view',
@@ -65,6 +72,10 @@ export const routes: Routes =
         path:'',
         redirectTo:'/dashboard',
         pathMatch:'full'
-    }
+     },
+     {        
+        path: 'form',
+        loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+     }
    
 ];
