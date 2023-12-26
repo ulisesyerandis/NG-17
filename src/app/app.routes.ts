@@ -57,7 +57,7 @@ export const routes: Routes =
             // },
             {        
                 path: 'form',
-                title:'form',
+                title:'Form',
                 loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
              },
             {
@@ -73,9 +73,9 @@ export const routes: Routes =
         redirectTo:'/dashboard',
         pathMatch:'full'
      },
-     {        
-        path: 'form',
-        loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
-     }
+    //  {        
+    //     path: 'form',
+    //     loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+    //  }
    
 ];

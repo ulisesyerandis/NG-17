@@ -6,6 +6,8 @@
   padding-bottom: 16px;
 }
 
-.demo-button + .demo-button {
-  margin-left: 8px;
+.demo-button {
+  background-color: #007bff;
+  margin-right: 8px;
 }
+

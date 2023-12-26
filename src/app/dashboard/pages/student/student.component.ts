@@ -16,7 +16,6 @@ export interface PeriodicElement {
   weight: number;
   symbol: string;
 }
-
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
@@ -42,7 +41,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export default class StudentComponent 
 {
-
+  list: [] = [];
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = [...ELEMENT_DATA];
 

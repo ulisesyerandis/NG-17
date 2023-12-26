@@ -1,14 +1,16 @@
 <app-title title="Student"></app-title>
 
     <div class="demo-button-container">
-        <button mat-raised-button (click)="addData()" class="demo-button">
+        <button mat-button  class="demo-button" style="width: 100px; height: 35px;">
           Add data
         </button>
         <button
-            mat-raised-button
+            mat-button
             [disabled]="!dataSource.length"
-            (click)="removeData()"
-            class="demo-button">
+            
+            class="demo-button"
+            style=" height: 35px;"  
+          >
           Remove data
         </button>
       </div>

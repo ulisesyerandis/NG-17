@@ -1,5 +1,5 @@
 <app-title title="Student List"></app-title>
-<section class="sect-studentList"> 
+<!-- <section class="sect-studentList"> 
   <button type="button"
     class="p-2 bg-blue-500 rounded text-white"
     id="bttn"
@@ -21,11 +21,43 @@
         </tr>
       </table>
 
- <!-- ///////////////////////////////////////////////// -->
-<script>
-  function openAddStudentWindow() 
-{
-   window.open([routerLink="item"], "Add Student", "width=500,height=300");
-}
-</script>
+</section> -->
+
+<section>
+    <div class="demo-button-container">
+      <button mat-button class="btn-add"
+      (click)="deleteStudent(24)"
+      >
+        Add student
+      </button>
+    </div>
 </section>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 studentList-table">
+   <!-- id Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Id.</th>
+    <th mat-cell *matCellDef="let element">{{element.id}}</th>
+  </ng-container>
+   <!-- name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Name</th>
+    <th mat-cell *matCellDef="let element">{{element.name}}</th>
+  </ng-container>
+  <!-- button column-->
+  <ng-container matColumnDef="button">
+    <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Options</th>
+    <th mat-cell *matCellDef="let element">
+      <button 
+        class="btn-update"
+        mat-button  
+        > Update  </button>
+      <button 
+        class="btn-delete"
+        mat-button (click)="deleteStudent(element.id)" 
+      >   Delete  </button>
+    </th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
