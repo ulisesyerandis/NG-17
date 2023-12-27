@@ -1,34 +1,47 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TitleComponent } from '@shared/title/title.component';
-import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { StudentListService } from '../../../services/student-list.service';
+import { routes } from '../../../app.routes';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CommonModule, TitleComponent, RouterModule, ReactiveFormsModule],
+  imports: 
+  [
+    CommonModule, TitleComponent, RouterModule, 
+     ReactiveFormsModule
+    ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export default class FormComponent 
+export default class FormComponent implements OnInit
 {
+  ngOnInit(): void
+   { }
+  public studentListService = inject(StudentListService);
+
   title = "Form";
   nombre = '';
   // name!: FormControl<any>;
   
   form = new FormGroup
   ({
-    name: new FormControl(),
+    'name': new FormControl('', Validators.required),
   });
 
-
-  public save()
+  enviar()
   {
-    // this.nombre = this.form.get('name')?.value
-    // 
-    this.nombre = this.form.get('name')?.value
-    console.log(this.nombre+" 1234")
-  }
+    // console.log(this.form.value)
+    this.studentListService.createStudent(this.form.value).subscribe({
+      next: (response: any) => {
+        console.log("student " + this.form.get('name')?.value + " created successfuly")
+      },
+      error: (error: any) => { }
+    });
 
+    return this.form.value;
+  }
 }

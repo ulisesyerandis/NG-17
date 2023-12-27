@@ -20,6 +20,7 @@ export class SidemenuComponent
     .map( routes => routes.children ?? [])
     .flat()
     .filter(route => route && route.path )
+  // routes: any;
     // .filter(routes => routes && !routes.path?.includes(':'))
 
   constructor ()
@@ -34,5 +35,7 @@ export class SidemenuComponent
     // .filter(routes => routes && !routes.path?.includes(':'))
 
     console.log(this.menuItems);
+     // this.menuItems.path.includes('form');
   }
+
 }

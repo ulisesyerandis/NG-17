@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { MatCardModule } from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatTableModule, MatTable} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule}  from '@angular/material/input'
  
 export const appConfig: ApplicationConfig = 
 {
@@ -17,6 +20,8 @@ export const appConfig: ApplicationConfig =
     provideRouter(routes),
     importProvidersFrom(HttpClientModule, FormsModule, NgModule, 
       BrowserModule, ReactiveFormsModule, 
-      MatCardModule, MatTableModule, MatTable),
+      MatCardModule, MatTableModule, MatTable,
+      MatPaginatorModule, MatFormFieldModule, MatInputModule
+      ),
   ]
 };

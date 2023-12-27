@@ -1,35 +1,18 @@
-<app-title title="Student List"></app-title>
-<!-- <section class="sect-studentList"> 
-  <button type="button"
-    class="p-2 bg-blue-500 rounded text-white"
-    id="bttn"
-    (click)="openAddStudentWindow()"
-  > 
-     <h1>Add student</h1>
-   </button>
-
-    <table border="1px solid black"
-        class="studentTabl"
-    >
-        <tr  class="cellTable">
-          <th class="headerTable">Id</th>
-          <th class="headerTable">Name</th>
-        </tr>
-        <tr *ngFor="let student of student">           
-          <td class="cellTable">{{ student.id }} - </td>
-          <td class="cellTable">{{ student.name }}</td>
-        </tr>
-      </table>
-
-</section> -->
+<app-title title="Student List" (search)="handleSearch($event)"></app-title>
 
 <section>
-    <div class="demo-button-container">
-      <button mat-button class="btn-add"
-      (click)="deleteStudent(24)"
-      >
+    <div class="demo-button-container">         
+      <button mat-button class="btn-add">
         Add student
       </button>
+      <mat-form-field class="mat-form-field" >
+        <input [formControl]="search" matInput placeholder=" Search">
+      </mat-form-field>
+      
+      <!-- <label class="label-find"> 
+        <input class = "input-find" placeholder="find" />
+        <button class="rounded btn-find"> Find </button>
+      </label> -->
     </div>
 </section>
 
@@ -61,3 +44,4 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -72,3 +72,29 @@
 {
     background-color:rgb(93, 132, 247);
 }
+
+.label-find
+{
+    /* background-color: rgb(93, 132, 247); */
+    margin-left: 8px;
+    border-color: black;
+    height: 35px;
+}
+
+.btn-find
+{
+    background-color: rgb(93, 132, 247);
+    width: 70px;
+    height: 35px;
+    margin-left: 8px;
+}
+
+.input-find
+{
+    height: 35px;
+}
+
+.mat-form-field
+{
+    /* width: 100%; */
+}

@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, SimpleChanges, ViewChild, inject, signal } from '@angular/core';
+import { CommonModule, NgFor } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild, inject, signal } from '@angular/core';
 import { TitleComponent } from '@shared/title/title.component';
 import { StudentListService } from '../../../services/student-list.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,6 +10,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { StudentService } from '../../../services/student.service';
+import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-student-list',
@@ -17,7 +22,9 @@ import { StudentService } from '../../../services/student.service';
   imports: 
   [
     CommonModule, TitleComponent, RouterModule,
-    MatCardModule, MatButtonModule, MatTableModule
+    MatCardModule, MatButtonModule, MatTableModule,
+    MatPaginatorModule, MatFormFieldModule, MatInputModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
@@ -33,18 +40,38 @@ export default class StudentListComponent implements OnInit
   dataSource: any;
   displayedColumns: string[] = [];
 
-  public item = routes
-  // .map(routes => routes.children ?? [])
+  // public menuItems = routes
+  // .map( routes => routes)
   // .flat()
-  .filter(route => route && route.path?.includes('form'))
-  
+  // .filter(route => route && route.path )
+  // .filter(routes => routes && !routes.path?.includes('form'))
+  // routes: any;
+
+ search = new FormControl('');
+ @Output('search') searchEmitter = new EventEmitter<any>();
+
 public constructor()
 {}
   ngOnInit(): void {
     this.FillStudentData();
     this.dataSource = this.studentList;
     this.displayedColumns = ['id','name','button'];
+
+    // for(const item of this.menuItems)
+    // {
+    //    console.log("rutas " + item.path)
+    // }
+   
+    this.search.valueChanges.subscribe(value => this.searchEmitter.emit(value))
+    console.log("22222 " + this.search.get('search')?.value)
   }
+
+  handleSearch(value:any)
+  {
+    console.log("lllllllllllll")
+    console.log(value)
+  }
+
 
 public FillStudentData(): void
 {
@@ -101,7 +128,4 @@ public findStudent(id: number)
     }
   }
 
-  ngAfterViewInit() {
-    this.dataSource = this.studentList;
-  }
 }
