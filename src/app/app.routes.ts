@@ -1,4 +1,10 @@
 import { Routes } from '@angular/router';
+import FormComponent from './dashboard/pages/form/form.component';
+import StudentComponent from './dashboard/pages/student/student.component';
+import StudentListComponent from './dashboard/pages/student-list/student-list.component';
+import ControlFlowComponent from './dashboard/pages/main-view/main-view.component';
+import DashboardComponent from './dashboard/dashboard.component';
+import findStudentComponent from './dashboard/pages/find-student/find-student.component';
 
 export const routes: Routes = 
 [
@@ -6,14 +12,16 @@ export const routes: Routes =
      {
         
         path: 'dashboard',
-        loadComponent: ()=> import( './dashboard/dashboard.component' ),
+        // loadComponent: ()=> import( './dashboard/dashboard.component' ),
+        component: DashboardComponent,
         children:
         [
             
             {
                 path:'main-view',
                 title:'Welcome to the University',
-                loadComponent: () => import('./dashboard/pages/main-view/main-view.component')
+                // loadComponent: () => import('./dashboard/pages/main-view/main-view.component'),
+                component:ControlFlowComponent
             },
             // {
             //     path:'change-detection',
@@ -33,17 +41,20 @@ export const routes: Routes =
             {
                 path:'student/:id',
                 title:'Add Student',
-                loadComponent: () => import('./dashboard/pages/student/student.component')
+                // loadComponent: () => import('./dashboard/pages/student/student.component'),
+                component: StudentComponent
             },
             {
                 path:'student-list',
                 title:'Student List',
-                loadComponent: () => import('./dashboard/pages/student-list/student-list.component'),
+                // loadComponent: () => import('./dashboard/pages/student-list/student-list.component'),
+                component: StudentListComponent
             },
             {
                 path:'find-student',
                 title:'Find Student',
-                loadComponent: () => import('./dashboard/pages/find-student/find-student.component')
+                // loadComponent: () => import('./dashboard/pages/find-student/find-student.component'),
+                component: findStudentComponent
             },
             // {
             //     path:'user-list',
@@ -55,11 +66,11 @@ export const routes: Routes =
             //     title:'View Transition',
             //     loadComponent: () => import('./dashboard/pages/view-transition/view-transition.component')
             // },
-            {        
-                path: 'form',
-                title:'Form',
-                loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
-             },
+            // {        
+            //     path: 'form',
+            //     title:'Form',
+            //     loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+            //  },
             {
                 path:'',
                 redirectTo:'main-view',
@@ -75,7 +86,8 @@ export const routes: Routes =
      },
      {        
         path: 'form',
-        loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+        component: FormComponent,
+        // loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
      }
    
 ];

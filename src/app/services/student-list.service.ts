@@ -29,7 +29,7 @@ export class StudentListService
 
   public updateStudent(id: number, student: any)
   {
-    return this.http.put('http://localhost:8000/student/${id}', student);
+    return this.http.put('http://localhost:8000/student/'+id, student);
   }
 
   public deleteStudent(id: number)

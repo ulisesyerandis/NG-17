@@ -32,7 +32,9 @@
 {
     background-color: rgb(93, 132, 247);
     margin-right: 8px;
-     width: 135px;
+     /* width: 135px; */
+     color: white;
+     padding: 10px 20px;
     
 }
 
@@ -53,6 +55,9 @@
     align-items: center;
     font-size: 20px;
     /* font-weight: bold; */
+    cursor: pointer !important;
+    pointer-events: background-color #4CAF50;
+    
 }
 
 .studentList-headerTable
@@ -98,3 +103,10 @@
 {
     /* width: 100%; */
 }
+.btn-op {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }

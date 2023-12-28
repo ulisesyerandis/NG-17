@@ -2,12 +2,12 @@
 
 <section>
     <div class="demo-button-container">         
-      <button mat-button class="btn-add">
+      <button mat-button class="btn-add" (click)="goToForm('Add student') ">
         Add student
       </button>
-      <mat-form-field class="mat-form-field" >
+      <!-- <mat-form-field class="mat-form-field" >
         <input [formControl]="search" matInput placeholder=" Search">
-      </mat-form-field>
+      </mat-form-field> -->
       
       <!-- <label class="label-find"> 
         <input class = "input-find" placeholder="find" />
@@ -17,6 +17,11 @@
 </section>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 studentList-table">
+   <!-- No Column -->
+   <!-- <ng-container matColumnDef="No">        
+        <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">No.</th>
+         <th mat-cell *matCellDef="let element" >{{count}}</th>  
+  </ng-container> -->
    <!-- id Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Id.</th>
@@ -45,3 +50,13 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<!-- <mat-paginator [length]="dataSource.length" 
+              [pageSize]="page_size"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              (page)="handlePage($event)"
+              aria-label="Select page">
+</mat-paginator> -->
+
+<!-- <button (click)="goToForm() " class="btn-op">Add Student</button> -->
+
+<router-outlet></router-outlet>

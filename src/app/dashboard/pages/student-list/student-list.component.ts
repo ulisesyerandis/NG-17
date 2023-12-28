@@ -3,7 +3,7 @@ import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild, inje
 import { TitleComponent } from '@shared/title/title.component';
 import { StudentListService } from '../../../services/student-list.service';
 import { HttpClient } from '@angular/common/http';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import FormComponent from '../form/form.component';
 import { routes } from '../../../app.routes';
 import { MatCardModule } from '@angular/material/card';
@@ -24,13 +24,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule, TitleComponent, RouterModule,
     MatCardModule, MatButtonModule, MatTableModule,
     MatPaginatorModule, MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,FormComponent
   ],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
 export default class StudentListComponent implements OnInit
 {
+  public formTitle = inject(FormComponent)
   public studentListService = inject(StudentListService)
 
   studentList: any;
@@ -39,20 +40,25 @@ export default class StudentListComponent implements OnInit
 
   dataSource: any;
   displayedColumns: string[] = [];
+  count:number = 0;
 
-  // public menuItems = routes
-  // .map( routes => routes)
-  // .flat()
-  // .filter(route => route && route.path )
-  // .filter(routes => routes && !routes.path?.includes('form'))
-  // routes: any;
+  public menuItems = routes
+  .map( routes => routes )
+  .flat()
+  .filter(route => route && route.path )
+  // .filter(routes => routes && routes.path?.includes('form'))
+
+  page_size: number = 3;
+  page_number: number = 1;
+  pageSizeOptions: number [] = [5, 10, 10];
 
  search = new FormControl('');
  @Output('search') searchEmitter = new EventEmitter<any>();
 
-public constructor()
+public constructor(private formRoutes: Router,)
 {}
-  ngOnInit(): void {
+  ngOnInit(): void 
+  {
     this.FillStudentData();
     this.dataSource = this.studentList;
     this.displayedColumns = ['id','name','button'];
@@ -72,6 +78,13 @@ public constructor()
     console.log(value)
   }
 
+  handlePage(e: PageEvent)
+  {
+    this.page_size = e.pageSize;
+    this.page_number = e.pageIndex + 1;
+console.log("page number "+this.page_number)
+console.log("size "+ this.page_size)
+  }
 
 public FillStudentData(): void
 {
@@ -110,6 +123,7 @@ public findStudent(id: number)
         this.studentDeleted = response;
         console.log("student " + this.studentDeleted.name + " deleted successfuly")
         this.ngOnChanges(this.studentList);
+        location.reload();
       },
       error:(error: any) =>{
 
@@ -117,10 +131,20 @@ public findStudent(id: number)
     }); 
   }
 
-  public updateStudent(student: any) 
-  {
-   
-  }
+  // public updateStudent(student: any) 
+  // {
+  //  (student, id) {
+  //     this.http.put(`/api/students/${id}`, student)
+  //       .subscribe(
+  //         (response) => {
+  //           this.students = response.json();
+  //         },
+  //         (error) => {
+  //           console.log(error);
+  //         }
+  //       );
+  //   }
+  // }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['studentList']) {
@@ -128,4 +152,21 @@ public findStudent(id: number)
     }
   }
 
+   goToForm(title: string) 
+   { 
+    // console.log(this.menuItems.at(0)?.children?.at(4)?.path);
+    console.log(this.menuItems);
+    console.log("titulo = " + title);
+    for (var i = 0; i < this.menuItems.length; i++) 
+    {
+      if (this.menuItems[i].path === 'form')
+      {
+        console.log("este es el titulo del formulario " + this.formTitle.title)
+        console.log('-----  '+ this.menuItems[i].path);
+        this.formRoutes.navigate([this.menuItems[i].path]);
+      }
+    }
+   
+  //  console.log(this.formRoutes.navigate(['./dashboard/pages/form/form.component']));
+  }
 }
