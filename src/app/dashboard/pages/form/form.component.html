@@ -1,8 +1,7 @@
-<app-title [title]="formTitle"> </app-title>
+<app-title [title]="title"> </app-title>
 <section class="section1">
   <div class="card">
     <div class="card-body">
-      <h1> {{formTitle}} + fgxhkl </h1>
       <form [formGroup]="form" (ngSubmit)="sendForm('student-list')">
         <div class="mb-2">
           <label class="form-label">

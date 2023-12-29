@@ -10,12 +10,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { StudentService } from '../../../services/student.service';
-import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule, PageEvent,MatPaginatorIntl } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ButtonService } from '../../../services/button.service';
 
 @Component({
   selector: 'app-student-list',
@@ -25,7 +24,7 @@ import { ButtonService } from '../../../services/button.service';
     CommonModule, TitleComponent, RouterModule,
     MatCardModule, MatButtonModule, MatTableModule,
     MatPaginatorModule, MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule,FormComponent
+    ReactiveFormsModule,FormComponent,
   ],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
@@ -38,10 +37,13 @@ export default class StudentListComponent implements OnInit
   studentList: any;
   studentFindIt: any;
   studentDeleted: any;
+  studentUpdated: any;
+  //    to change the title of the FormComponent by the add and update button click
+ @ViewChild(TitleComponent, { static: true })       
+  title!: TitleComponent;
 
   dataSource: any;
   displayedColumns: string[] = [];
-  count:number = 0;
 
   public menuItems = routes
   .map( routes => routes )
@@ -52,6 +54,8 @@ export default class StudentListComponent implements OnInit
   page_size: number = 3;
   page_number: number = 1;
   pageSizeOptions: number [] = [5, 10, 10];
+  paginator!: MatPaginator;
+paginatorIntl!: MatPaginatorIntl;
 
  search = new FormControl('');
  @Output('search') searchEmitter = new EventEmitter<any>();
@@ -59,7 +63,6 @@ export default class StudentListComponent implements OnInit
 public constructor
 (
   private formRoutes: Router,
-  private buttonService: ButtonService,
 )
 {}
   ngOnInit(): void 
@@ -68,14 +71,15 @@ public constructor
     this.dataSource = this.studentList;
     this.displayedColumns = ['No','id','name','button'];
 
-    // for(const item of this.menuItems)
-    // {
-    //    console.log("rutas " + item.path)
-    // }
+  this.paginatorIntl = new MatPaginatorIntl();
+  this.paginatorIntl.itemsPerPageLabel = 'Elementos por página';
    
     this.search.valueChanges.subscribe(value => this.searchEmitter.emit(value))
     console.log("22222 " + this.search.get('search')?.value)
   }
+  // ngAfterViewInit(): void {
+  //   this.dataSource.paginator = this.paginator;
+  // }
 
   handleSearch(value:any)
   {
@@ -136,20 +140,17 @@ public findStudent(id: number)
     }); 
   }
 
-  // public updateStudent(student: any) 
-  // {
-  //  (student, id) {
-  //     this.http.put(`/api/students/${id}`, student)
-  //       .subscribe(
-  //         (response) => {
-  //           this.students = response.json();
-  //         },
-  //         (error) => {
-  //           console.log(error);
-  //         }
-  //       );
-  //   }
-  // }
+  public updateStudent(id: number, student: any) 
+  {
+    this.studentListService.updateStudent(id, student).subscribe({
+      next: (response: any) =>{
+        this.studentUpdated = response;
+        console.log("student " + this.studentUpdated.name + " updated successfuly")
+      },
+      error:(error: any) =>{
+      },
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['studentList']) {
@@ -157,43 +158,31 @@ public findStudent(id: number)
     }
   }
 
-   goToForm(title: string) 
+   goToForm(buttontitle: string) 
    { 
     // console.log(this.menuItems.at(0)?.children?.at(4)?.path);
     console.log(this.menuItems);
-    console.log("titulo = " + title);
+    console.log("titulo = " + buttontitle);
     for (var i = 0; i < this.menuItems.length; i++) 
     {
       if (this.menuItems[i].path === 'form')
       {
-        console.log("este es el titulo del formulario " + this.formTitle.title)
-        console.log('-----  '+ this.menuItems[i].path);
+        if(buttontitle === 'add')
+        {
+          this.title.title = 'Add student';
+          this.formTitle.title = 'Add student';
+        }else if(buttontitle === 'update')
+        {
+          this.title.title = 'Update student';
+          this.formTitle.title = 'Update student';
+        }
+        console.log("este es el titulo del formulario ->" + this.formTitle.title)
+        console.log('este es el titulo del TitleComponent  '+ this.title.title);
         this.formRoutes.navigate([this.menuItems[i].path]);
       }
+      console.log("2 - este es el titulo del formulario ->" + this.formTitle.title)
     }
-   if(title === "Add Student")
-   {
-     onAddStudentClick() 
-     {
-    this.buttonService.sendButtonClicked('add');
-      }
-   }else if(title === "Update Student")
-   {
-  onUpdateStudentClick() 
-  {
-    this.buttonService.sendButtonClicked('update');
-  }
-   }
+  
   //  console.log(this.formRoutes.navigate(['./dashboard/pages/form/form.component']));
   }
-
- 
-
-}
-
-function onAddStudentClick() {
-  throw new Error('Function not implemented.');
-}
-function onUpdateStudentClick() {
-  throw new Error('Function not implemented.');
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TitleComponent } from '@shared/title/title.component';
 import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,7 +10,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import StudentListComponent from '../student-list/student-list.component';
-import { ButtonService } from '../../../services/button.service';
 
 @Component({
   selector: 'app-form',
@@ -26,12 +25,12 @@ import { ButtonService } from '../../../services/button.service';
 })
 export default class FormComponent implements OnInit
 {
-  [x: string]: any;
   public studentListService = inject(StudentListService);
 
   title: string  ='';
-  formTitle: string = '';
-  
+  @ViewChild(StudentListComponent, { static: true })
+  vcTitle!: StudentListComponent;
+
   form = new FormGroup
   ({
     'name': new FormControl('', Validators.required),
@@ -44,22 +43,11 @@ export default class FormComponent implements OnInit
   public constructor
   (
     private route: Router,
-    private buttonService: ButtonService  
   )
   {}
-
   ngOnInit() 
   {
-    console.log('1');
-    this.buttonService.buttonClicked$.subscribe((button: string) => {
-      console.log("nombre del boton -> "+button);
-      if (button === 'add') {
-        this.formTitle = 'Add student';
-      } else if (button === 'update') {
-        this.formTitle = 'Update student';
-      }
-    });
-    console.log("nuevo -> "+this.formTitle);
+   console.log("titulo => " + this.title)
   }
   
   sendForm(routeToGo: string)

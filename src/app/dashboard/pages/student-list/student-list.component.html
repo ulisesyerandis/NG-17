@@ -1,9 +1,8 @@
 <app-title title="Student List" (search)="handleSearch($event)"></app-title>
-
 <section>
     <div class="demo-button-container">         
       <button mat-button id="add-student" class="btn-add" 
-      (click)="goToForm('Add student') ">
+      (click)="goToForm('add') ">
         Add student
       </button>
       <!-- <mat-form-field class="mat-form-field" >
@@ -38,12 +37,12 @@
     <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Options</th>
     <th mat-cell class="studentList-cellTable" *matCellDef="let element">
       <button 
-        class="btn-update"
-        mat-button  
+        class="btn-update"mat-button
+      (click)="goToForm('update')"
         > Update  </button>
       <button 
-        class="btn-delete"
-        mat-button (click)="deleteStudent(element.id)" 
+        class="btn-delete"mat-button 
+        (click)="deleteStudent(element.id)" 
       >   Delete  </button>
     </th>
   </ng-container>
