@@ -10,6 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import StudentListComponent from '../student-list/student-list.component';
+import { ButtonService } from '../../../services/button.service';
 
 @Component({
   selector: 'app-form',
@@ -18,7 +19,7 @@ import StudentListComponent from '../student-list/student-list.component';
   [
     CommonModule, TitleComponent, RouterModule, 
      ReactiveFormsModule, MatFormFieldModule, 
-     MatInputModule, MatButtonModule
+     MatInputModule, MatButtonModule,
     ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
@@ -29,6 +30,7 @@ export default class FormComponent implements OnInit
   public studentListService = inject(StudentListService);
 
   title: string  ='';
+  formTitle: string = '';
   
   form = new FormGroup
   ({
@@ -39,20 +41,27 @@ export default class FormComponent implements OnInit
     .map( routes => routes.children ?? [])
     .flat()
 
-  public constructor(private route: Router)
+  public constructor
+  (
+    private route: Router,
+    private buttonService: ButtonService  
+  )
   {}
 
-  ngOnInit() {
-    // // Get the value of the button that was clicked
-    // const button = this['event'].target;
-
-    // // Set the title of the form based on the button value
-    // if (button.id === 'update-student') {
-    //   this.title = 'Update Student';
-    // } else if (button.id === 'add-student') {
-    //   this.title = 'Add Student';
-    // }
+  ngOnInit() 
+  {
+    console.log('1');
+    this.buttonService.buttonClicked$.subscribe((button: string) => {
+      console.log("nombre del boton -> "+button);
+      if (button === 'add') {
+        this.formTitle = 'Add student';
+      } else if (button === 'update') {
+        this.formTitle = 'Update student';
+      }
+    });
+    console.log("nuevo -> "+this.formTitle);
   }
+  
   sendForm(routeToGo: string)
   {
     // console.log(this.form.value)

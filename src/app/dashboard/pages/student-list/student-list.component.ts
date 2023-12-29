@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonService } from '../../../services/button.service';
 
 @Component({
   selector: 'app-student-list',
@@ -55,13 +56,17 @@ export default class StudentListComponent implements OnInit
  search = new FormControl('');
  @Output('search') searchEmitter = new EventEmitter<any>();
 
-public constructor(private formRoutes: Router,)
+public constructor
+(
+  private formRoutes: Router,
+  private buttonService: ButtonService,
+)
 {}
   ngOnInit(): void 
   {
     this.FillStudentData();
     this.dataSource = this.studentList;
-    this.displayedColumns = ['id','name','button'];
+    this.displayedColumns = ['No','id','name','button'];
 
     // for(const item of this.menuItems)
     // {
@@ -166,7 +171,29 @@ public findStudent(id: number)
         this.formRoutes.navigate([this.menuItems[i].path]);
       }
     }
-   
+   if(title === "Add Student")
+   {
+     onAddStudentClick() 
+     {
+    this.buttonService.sendButtonClicked('add');
+      }
+   }else if(title === "Update Student")
+   {
+  onUpdateStudentClick() 
+  {
+    this.buttonService.sendButtonClicked('update');
+  }
+   }
   //  console.log(this.formRoutes.navigate(['./dashboard/pages/form/form.component']));
   }
+
+ 
+
+}
+
+function onAddStudentClick() {
+  throw new Error('Function not implemented.');
+}
+function onUpdateStudentClick() {
+  throw new Error('Function not implemented.');
 }

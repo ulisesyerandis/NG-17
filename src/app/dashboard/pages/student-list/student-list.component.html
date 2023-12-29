@@ -2,7 +2,8 @@
 
 <section>
     <div class="demo-button-container">         
-      <button mat-button class="btn-add" (click)="goToForm('Add student') ">
+      <button mat-button id="add-student" class="btn-add" 
+      (click)="goToForm('Add student') ">
         Add student
       </button>
       <!-- <mat-form-field class="mat-form-field" >
@@ -18,24 +19,24 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 studentList-table">
    <!-- No Column -->
-   <!-- <ng-container matColumnDef="No">        
+   <ng-container matColumnDef="No">        
         <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">No.</th>
-         <th mat-cell *matCellDef="let element" >{{count}}</th>  
-  </ng-container> -->
+        <td mat-cell class="studentList-cellTable" *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+  </ng-container>
    <!-- id Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Id.</th>
-    <th mat-cell *matCellDef="let element">{{element.id}}</th>
+    <th mat-cell class="studentList-cellTable" *matCellDef="let element">{{element.id}}</th>
   </ng-container>
    <!-- name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Name</th>
-    <th mat-cell *matCellDef="let element">{{element.name}}</th>
+    <th mat-cell class="studentList-cellTable" *matCellDef="let element">{{element.name}}</th>
   </ng-container>
   <!-- button column-->
   <ng-container matColumnDef="button">
     <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Options</th>
-    <th mat-cell *matCellDef="let element">
+    <th mat-cell class="studentList-cellTable" *matCellDef="let element">
       <button 
         class="btn-update"
         mat-button  
@@ -50,6 +51,13 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+<!-- <mat-paginator [pageSizeOptions]="[5, 10, 25]" 
+  showFirstLastButtons [length]="dataSource.length" [pageSize]="5"
+  [pageIndex]="0" [showFirstLastButtons]="true" [hidePageSize]="false"
+  [showPreviousNextButtons]="true"   [intl]="paginatorIntl" 
+  #paginator
+>
+</mat-paginator> -->
 <!-- <mat-paginator [length]="dataSource.length" 
               [pageSize]="page_size"
               [pageSizeOptions]="[5, 10, 25, 100]"
