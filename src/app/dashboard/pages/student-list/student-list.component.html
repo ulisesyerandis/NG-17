@@ -1,9 +1,10 @@
-<app-title title="Student List" (search)="handleSearch($event)"></app-title>
+<ng-container *ngIf="!editable; else editar">
+<h1 title="Student List" (search)="handleSearch($event)"></h1>
 <section>
     <div class="demo-button-container">         
       <button mat-button id="add-student" class="btn-add" 
-      (click)="goToForm('add') ">
-        Add student
+      (click)="goToForm('Add Student') ">
+        Add Student
       </button>
       <!-- <mat-form-field class="mat-form-field" >
         <input [formControl]="search" matInput placeholder=" Search">
@@ -24,7 +25,7 @@
   </ng-container>
    <!-- id Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">Id.</th>
+    <th mat-header-cell *matHeaderCellDef class="studentList-headerTable">id.</th>
     <th mat-cell class="studentList-cellTable" *matCellDef="let element">{{element.id}}</th>
   </ng-container>
    <!-- name Column -->
@@ -38,7 +39,7 @@
     <th mat-cell class="studentList-cellTable" *matCellDef="let element">
       <button 
         class="btn-update"mat-button
-      (click)="goToForm('update')"
+      (click)="goToForm('Update')"
         > Update  </button>
       <button 
         class="btn-delete"mat-button 
@@ -62,8 +63,14 @@
               [pageSizeOptions]="[5, 10, 25, 100]"
               (page)="handlePage($event)"
               aria-label="Select page">
-</mat-paginator> -->
+</mat-paginator>
+{{dataSource.length| json }} -->
+<button (click)="editable = true " class="btn-op">Add Student</button>
+</ng-container>
 
-<!-- <button (click)="goToForm() " class="btn-op">Add Student</button> -->
+<ng-template #editar>
+  <app-form-student [formInfo]="titleForm" (editable)="editable = $event"> </app-form-student>
+  <!-- <button (click)="editable = false" class="btn-op bg-blue-300">Add</button> -->
+</ng-template>
 
 <router-outlet></router-outlet>

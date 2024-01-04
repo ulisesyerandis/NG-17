@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 import { MatCardModule } from '@angular/material/card';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatTableModule, MatTable} from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule}  from '@angular/material/input'
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import FormComponent from './dashboard/pages/form/form.component';
 import StudentListComponent from './dashboard/pages/student-list/student-list.component';
+import ControlFlowComponent from './dashboard/pages/main-view/main-view.component';
+import { FormStudentComponent } from './dashboard/pages/form-student/form-student.component';
  
 export const appConfig: ApplicationConfig = 
 {
@@ -25,9 +27,10 @@ export const appConfig: ApplicationConfig =
       BrowserModule, ReactiveFormsModule, 
       MatCardModule, MatTableModule, MatTable,
       MatPaginatorModule, MatFormFieldModule, MatInputModule,
-      NoopAnimationsModule, 
+      NoopAnimationsModule, MatPaginator
       ),
-      FormComponent, StudentListComponent, 
-  ]
-}
+      FormComponent, StudentListComponent, ControlFlowComponent,
+      FormStudentComponent
+  ],
 
+}

@@ -15,6 +15,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import ControlFlowComponent from '../main-view/main-view.component';
+import DashboardComponent from '../../dashboard.component';
+import { FormStudentComponent } from '../form-student/form-student.component';
 
 @Component({
   selector: 'app-student-list',
@@ -24,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule, TitleComponent, RouterModule,
     MatCardModule, MatButtonModule, MatTableModule,
     MatPaginatorModule, MatFormFieldModule, MatInputModule,
-    ReactiveFormsModule,FormComponent,
+    ReactiveFormsModule,FormComponent, ControlFlowComponent,
+    DashboardComponent, FormStudentComponent,
   ],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
@@ -38,9 +42,7 @@ export default class StudentListComponent implements OnInit
   studentFindIt: any;
   studentDeleted: any;
   studentUpdated: any;
-  //    to change the title of the FormComponent by the add and update button click
- @ViewChild(TitleComponent, { static: true })       
-  title!: TitleComponent;
+  //    to change the title of the FormComponent by the add and update button click       
 
   dataSource: any;
   displayedColumns: string[] = [];
@@ -55,10 +57,14 @@ export default class StudentListComponent implements OnInit
   page_number: number = 1;
   pageSizeOptions: number [] = [5, 10, 10];
   paginator!: MatPaginator;
-paginatorIntl!: MatPaginatorIntl;
+  paginatorIntl!: MatPaginatorIntl;
 
  search = new FormControl('');
  @Output('search') searchEmitter = new EventEmitter<any>();
+
+ editable: boolean = false;
+ titleForm!: string ;
+// information: JSON = { }
 
 public constructor
 (
@@ -160,29 +166,33 @@ public findStudent(id: number)
 
    goToForm(buttontitle: string) 
    { 
+    this.titleForm = buttontitle;
+    this.editable = true;
+    console.log('button add clicked');
     // console.log(this.menuItems.at(0)?.children?.at(4)?.path);
-    console.log(this.menuItems);
-    console.log("titulo = " + buttontitle);
-    for (var i = 0; i < this.menuItems.length; i++) 
-    {
-      if (this.menuItems[i].path === 'form')
-      {
-        if(buttontitle === 'add')
-        {
-          this.title.title = 'Add student';
-          this.formTitle.title = 'Add student';
-        }else if(buttontitle === 'update')
-        {
-          this.title.title = 'Update student';
-          this.formTitle.title = 'Update student';
-        }
-        console.log("este es el titulo del formulario ->" + this.formTitle.title)
-        console.log('este es el titulo del TitleComponent  '+ this.title.title);
-        this.formRoutes.navigate([this.menuItems[i].path]);
-      }
-      console.log("2 - este es el titulo del formulario ->" + this.formTitle.title)
-    }
-  
-  //  console.log(this.formRoutes.navigate(['./dashboard/pages/form/form.component']));
+  //   console.log(this.menuItems);
+  //   console.log("titulo = " + buttontitle);
+  //   for (var i = 0; i < this.menuItems.length; i++) 
+  //   {
+  //     if (this.menuItems[i].path === 'form')
+  //     {
+  //       if(buttontitle === 'add')
+  //       {
+  //         this.formTitle.title = 'Add student';
+  //       }else if(buttontitle === 'update')
+  //       {
+  //         this.formTitle.title = 'Update student';
+  //       }
+  //       console.log("este es el titulo del formulario ->" + this.formTitle.title)
+  //       this.formRoutes.navigate([this.menuItems[i].path]);
+  //     }
+  //     console.log("2 - este es el titulo del formulario ->" + this.formTitle.title)
+  //   }
+  // //  console.log(this.formRoutes.navigate(['./dashboard/pages/form/form.component']));
+  // }
+  console.log('titulo = '+ this.titleForm);
+  console.log('student = '+ this.studentList)
+//  this.information = {}
+//  JSON.parse(this.titleForm + '.' + this.dataSource.at[this.dataSource.length-1] );
   }
 }

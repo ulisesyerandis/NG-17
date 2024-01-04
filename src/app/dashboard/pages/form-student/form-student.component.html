@@ -1,0 +1,24 @@
+<h1> {{title}}</h1>
+<div class="form-div">
+    <form [formGroup] = "form" >
+        <div class="mb-2">
+            <label for="text" class="form-label">
+                id:
+            </label>
+            <br />
+            <label for="text" class="form-label">
+                Name:
+            </label>
+            <input type="text" class="form-input" 
+                formControlName = "name" placeholder = "Name"
+            />
+            <div class="alert alert-danger mt-2" [hidden] = "form.get('name')?.valid || form.get('name')?.pristine">
+                The name is required. Please
+            </div>
+            <button mat-button class="btn-save-form " [disabled]="form.invalid"
+        (click)="sendForm('student-list')" 
+        > {{buttonTitle}} </button>
+        </div>
+    </form>
+</div>
+<router-outlet></router-outlet>

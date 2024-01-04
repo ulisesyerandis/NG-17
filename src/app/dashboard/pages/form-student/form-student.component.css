@@ -1,0 +1,17 @@
+.btn-save-form
+{
+    cursor: pointer !important;
+    background: royalblue;
+}
+
+.form-input
+{
+    border-radius: 8px !;
+    margin-right: 8px;
+}
+
+.form-label
+{
+    background-color: white;
+    background: rgb(68, 119, 228);
+}

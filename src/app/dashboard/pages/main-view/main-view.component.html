@@ -1,4 +1,6 @@
 <!-- <h1 class="text-3xl mb-5 font-bold">  Control Flow  </h1> -->
+
+<<ng-container *ngIf="!editable; else editar">
 <app-title title = "Welcome to the University"></app-title>
 
 <section 
@@ -85,7 +87,12 @@
         }
        
         </div>
+        <button class="bg-blue-100" (click) ="editable = true"> Edit </button>
 </section>
+</ng-container>
 
+<ng-template #editar> 
+    <button (click)="editable = false"> close</button>
+    <app-main-view></app-main-view>
   
-   
+</ng-template>

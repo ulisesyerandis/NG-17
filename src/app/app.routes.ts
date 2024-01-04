@@ -5,6 +5,8 @@ import StudentListComponent from './dashboard/pages/student-list/student-list.co
 import ControlFlowComponent from './dashboard/pages/main-view/main-view.component';
 import DashboardComponent from './dashboard/dashboard.component';
 import findStudentComponent from './dashboard/pages/find-student/find-student.component';
+import { Component } from '@angular/core';
+import { FormStudentComponent } from './dashboard/pages/form-student/form-student.component';
 
 export const routes: Routes = 
 [
@@ -88,6 +90,11 @@ export const routes: Routes =
         path: 'form',
         component: FormComponent,
         // loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+     },
+     {
+        path: 'formStudent',
+     component: FormStudentComponent,
      }
+     
    
 ];
