@@ -41,7 +41,8 @@ export default class StudentListComponent implements OnInit
   studentList: any;
   studentFindIt: any;
   studentDeleted: any;
-  studentUpdated: any;
+  studentToUpdate: any; //old student
+  studentUpdated: any;  //new student
   //    to change the title of the FormComponent by the add and update button click       
 
   dataSource: any;
@@ -164,9 +165,9 @@ public findStudent(id: number)
     }
   }
 
-   goToForm(buttontitle: string) 
+  addButton() 
    { 
-    this.titleForm = buttontitle;
+    this.titleForm = 'Add Student';
     this.editable = true;
     console.log('button add clicked');
     // console.log(this.menuItems.at(0)?.children?.at(4)?.path);
@@ -194,5 +195,18 @@ public findStudent(id: number)
   console.log('student = '+ this.studentList)
 //  this.information = {}
 //  JSON.parse(this.titleForm + '.' + this.dataSource.at[this.dataSource.length-1] );
+  }
+
+  updateButton(student: any)
+  {
+    this.titleForm = 'Update';
+    this.editable = true;
+    console.log('button update clicked');
+    this.studentToUpdate = student;
+    console.log('student selected to update = ' + this.studentToUpdate.name);
+    console.log('student selected to update = ' + student.name);
+
+  // console.log('student = '+ this.studentUpdated.name + 'updated successfully')
+
   }
 }

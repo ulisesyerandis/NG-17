@@ -3,7 +3,7 @@
 <section>
     <div class="demo-button-container">         
       <button mat-button id="add-student" class="btn-add" 
-      (click)="goToForm('Add Student') ">
+      (click)="addButton() ">
         Add Student
       </button>
       <!-- <mat-form-field class="mat-form-field" >
@@ -39,7 +39,7 @@
     <th mat-cell class="studentList-cellTable" *matCellDef="let element">
       <button 
         class="btn-update"mat-button
-      (click)="goToForm('Update')"
+      (click)="updateButton(element)"
         > Update  </button>
       <button 
         class="btn-delete"mat-button 
@@ -69,7 +69,7 @@
 </ng-container>
 
 <ng-template #editar>
-  <app-form-student [formInfo]="titleForm" (editable)="editable = $event"> </app-form-student>
+  <app-form-student [formInfo]="titleForm" [studentToUpdate]="studentToUpdate" (editable)="editable = $event"> </app-form-student>
   <!-- <button (click)="editable = false" class="btn-op bg-blue-300">Add</button> -->
 </ng-template>
 

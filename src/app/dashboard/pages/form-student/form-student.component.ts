@@ -26,7 +26,11 @@ export class FormStudentComponent implements OnInit
   buttonTitle!: string;
 
   @Input()formInfo: string = 'sin nombre';
+  @Input()studentToUpdate: any;
   @Output()editable = new EventEmitter<boolean>();
+  oldStudent: any;
+  newStudent: any;
+  studentUpdated: any;
   
   ngOnInit(): void
   {
@@ -39,10 +43,13 @@ export class FormStudentComponent implements OnInit
      {
       this.title = this.formInfo;
       this.buttonTitle = 'Update';
+      this.form.value.name = this.studentToUpdate.name;
+      this.oldStudent = this.studentToUpdate;
+      console.log('form student = ' + this.form.value.name);
      }
   }
 
-  sendForm(routeToGo: string)
+  sendForm()
   {
     if(this.formInfo === 'Add Student')
     {
@@ -55,7 +62,17 @@ export class FormStudentComponent implements OnInit
     }
     else
     {
-      // this.studentListService.updateStudent()
+      this.newStudent = this.form.value;
+      console.log('id = ' + this.studentToUpdate.id);
+      console.log('student ' + this.newStudent.name)
+      this.studentListService.updateStudent(this.studentToUpdate.id, this.newStudent).subscribe({
+        next: (response: any) =>{
+          this.studentUpdated = response;
+          console.log("student " + this.studentUpdated.name + " updated successfuly")
+        },
+        error:(error: any) =>{
+        },
+      });
     }
     
     this.editable.emit(false);
