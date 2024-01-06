@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormControlName } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StudentListService } from '../../../services/student-list.service';
 
@@ -28,6 +28,7 @@ export class FormStudentComponent implements OnInit
   @Input()formInfo: string = 'sin nombre';
   @Input()studentToUpdate: any;
   @Output()editable = new EventEmitter<boolean>();
+
   oldStudent: any;
   newStudent: any;
   studentUpdated: any;
@@ -45,12 +46,15 @@ export class FormStudentComponent implements OnInit
       this.buttonTitle = 'Update';
       this.form.value.name = this.studentToUpdate.name;
       this.oldStudent = this.studentToUpdate;
-      console.log('form student = ' + this.form.value.name);
+      console.log('old student in form.value = ' + this.form.value.name);      
+      console.log('old student in oldStudent var = ' + this.oldStudent.name); 
      }
+     console.log(this.form.value.name)
   }
 
   sendForm()
   {
+    console.log('help')
     if(this.formInfo === 'Add Student')
     {
       this.studentListService.createStudent(this.form.value).subscribe({
@@ -60,12 +64,12 @@ export class FormStudentComponent implements OnInit
       error: (error: any) => { }
     });
     }
-    else
+    else if(this.formInfo === 'Update')
     {
       this.newStudent = this.form.value;
-      console.log('id = ' + this.studentToUpdate.id);
-      console.log('student ' + this.newStudent.name)
-      this.studentListService.updateStudent(this.studentToUpdate.id, this.newStudent).subscribe({
+      console.log('id of old student= ' + this.oldStudent.id);
+      console.log('new student ' + this.newStudent.name);
+      this.studentListService.updateStudent(this.oldStudent.id, this.newStudent).subscribe({
         next: (response: any) =>{
           this.studentUpdated = response;
           console.log("student " + this.studentUpdated.name + " updated successfuly")

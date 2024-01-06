@@ -1,24 +1,41 @@
-<h1> {{title}}</h1>
-<div class="form-div">
+<h1 class="title"> {{title}}</h1>
+<div class="div-form">
     <form [formGroup] = "form" >
-        <div class="mb-2">
-            <label for="text" class="form-label">
-                id:
-            </label>
-            <br />
-            <label for="text" class="form-label">
-                Name:
-            </label>
-            <input type="text" class="form-input" 
-                formControlName = "name" placeholder = "Name"
-            />
-            <div class="alert alert-danger mt-2" [hidden] = "form.get('name')?.valid || form.get('name')?.pristine">
-                The name is required. Please
+        <ng-container class="container-oldStudent" *ngIf="title === 'Update'">
+            <div class="div-oldStudent mb-2 bg-blue-200 rounded shadow p-2">
+                <h2 class="title2"> Student </h2>
+                <label for="text" class="label-form">
+                  id:         {{oldStudent.id}}
+                </label>
+                 <br />
+                 <label for="text" class="label-form">
+                   Name: {{oldStudent.name}}
+                 </label>
             </div>
-            <button mat-button class="btn-save-form " [disabled]="form.invalid"
-        (click)="sendForm()" 
-        > {{buttonTitle}} </button>
-        </div>
+        </ng-container>
+
+        <ng-container class="container-newStudent">
+            <h2 class="title2" *ngIf="title === 'Update'"> Update </h2>
+            <div class="div-newStudent mb-2 bg-blue-200 rounded shadow p-2">
+                <label for="text" class="label-form"  *ngIf="title === 'Update'">
+                    id:  {{oldStudent.id}}
+                </label>
+                <br />
+                <label for="text" class="label-form">
+                    Name:
+                </label>
+                <input type="text" class="input-form" 
+                    formControlName = "name" placeholder = "Name"
+                />
+                <div class="alert alert-danger mt-2" [hidden] = "form.get('name')?.valid || form.get('name')?.pristine">
+                    The name is required. Please
+                </div>
+                <button mat-button class="btn-save-form bg-blue-500 rounded " [disabled]="form.invalid"
+                    (click)="sendForm()" 
+                > {{buttonTitle}} </button>
+            </div>
+        </ng-container>
+        
     </form>
 </div>
 <router-outlet></router-outlet>
