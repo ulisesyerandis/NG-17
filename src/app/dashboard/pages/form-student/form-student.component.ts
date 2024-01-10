@@ -3,6 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, 
 import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormControlName } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { StudentListService } from '../../../services/student-list.service';
+import { studentModel } from '../../../models/studentModel';
 
 @Component({
   selector: 'app-form-student',
@@ -27,12 +28,13 @@ export class FormStudentComponent implements OnInit
 
   @Input()formName: string = 'sin nombre';
   @Input()studentToUpdate: any;
-  @Input()studentToSearch: any;
+  @Input()studentToSearch!: studentModel;
   @Output()editable = new EventEmitter<boolean>();
 
   oldStudent: any;
   newStudent: any;
   studentUpdated: any;
+  studentName: string = 'juan';
   
   ngOnInit(): void
   {
@@ -54,9 +56,27 @@ export class FormStudentComponent implements OnInit
      {
       this.title = this.formName;
       this.buttonTitle = 'Accept';
+      this.studentName = this.studentToSearch.name;
+      console.log( this.studentName)
+      console.log('klvgnsgva');     
      }
-     console.log(this.form.value.name)
   }
+
+  // async someFunction() {
+  //   await this.waitForStudentName();
+  //   console.log(this.studentToSearch.name) 
+  // }
+  
+  // waitForStudentName(): Promise<void> {
+  //   return new Promise<void>((resolve) => {
+  //     const interval = setInterval(() => {
+  //       if (this.studentToSearch) {
+  //         clearInterval(interval);
+  //         resolve();
+  //       }
+  //     }, 100);
+  //   });
+  // }
 
   sendForm()
   {
@@ -75,7 +95,8 @@ export class FormStudentComponent implements OnInit
       this.newStudent = this.form.value;
       console.log('id of old student= ' + this.oldStudent.id);
       console.log('new student ' + this.newStudent.name);
-      this.studentListService.updateStudent(this.oldStudent.id, this.newStudent).subscribe({
+      this.studentListService.updateStudent(this.oldStudent.id, this.newStudent)
+      .subscribe({
         next: (response: any) =>{
           this.studentUpdated = response;
           console.log("student " + this.studentUpdated.name + " updated successfuly")
@@ -91,6 +112,7 @@ export class FormStudentComponent implements OnInit
 
   back() 
     {
+      console.log('back 1')
       this.editable.emit(false);
       console.log('back')
     }

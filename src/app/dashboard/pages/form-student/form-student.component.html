@@ -39,17 +39,16 @@
         
         <ng-container class="container-searchStudent" *ngIf="title === 'Search'">
             <div class="div-searchStudent mb-2 bg-blue-200 rounded shadow p-2">
-                <!-- <label for="text" class="label-form">    
-                    id:  {{studentToSearchByName.id}}
-                </label> -->
+                <label for="text" class="label-form">    
+                    id:  {{studentToSearch.id}}
+                </label>
                 <br />
                 <label for="text" class="label-form">
                     Name: {{studentToSearch.name}}
                 </label>
                 <button mat-button class="btn-save-form bg-blue-500 rounded " 
-                    [disabled]="form.invalid"
                     (click)="back()" 
-                > {{title}} </button>
+                > {{buttonTitle}} </button>
             </div>
         </ng-container>
     </form>

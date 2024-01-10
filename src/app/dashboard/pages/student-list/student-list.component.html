@@ -9,7 +9,10 @@
     
       <mat-form-field class="mat-form-field" >
         <div [formGroup]="searchForm">
-          <input type="number" formControlName = 'nameInput' matInput placeholder=" Search">
+          <input type="number" formControlName = 'nameInput' 
+          matInput 
+          [(ngModel)]="defaultValue"
+          >
         </div>        
       </mat-form-field> 
       
@@ -94,8 +97,8 @@
    @defer (when titleForm === 'Search') 
    {
       <app-form-student 
-        [formName]="titleForm"    
-        [studentToSearch]="studentToSearch"   
+        [studentToSearch]="studentToSearch"
+        [formName]="titleForm"       
         (editable)="editable = $event"
       > </app-form-student>
    }

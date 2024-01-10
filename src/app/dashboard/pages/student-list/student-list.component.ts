@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import ControlFlowComponent from '../main-view/main-view.component';
 import DashboardComponent from '../../dashboard.component';
 import { FormStudentComponent } from '../form-student/form-student.component';
+import { studentModel } from '../../../models/studentModel';
 
 @Component({
   selector: 'app-student-list',
@@ -49,7 +50,7 @@ export default class StudentListComponent implements OnInit
   studentDeleted: any;
   studentToUpdate: any; //old student
   studentUpdated: any;  //new student
-  studentToSearch: any; 
+  studentToSearch!: studentModel;
   studentName!: string;
 
   dataSource: any;
@@ -69,6 +70,7 @@ export default class StudentListComponent implements OnInit
 
  editable: boolean = false;
  titleForm!: string ;
+ defaultValue = 0;
 // information: JSON = { }
 
 public constructor
@@ -144,18 +146,6 @@ public findStudent(id: number)
 
       },
     }); 
-  }
-
-  public updateStudent(id: number, student: any) 
-  {
-    this.studentListService.updateStudent(id, student).subscribe({
-      next: (response: any) =>{
-        this.studentUpdated = response;
-        console.log("student " + this.studentUpdated.name + " updated successfuly")
-      },
-      error:(error: any) =>{
-      },
-    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -237,7 +227,9 @@ public findStudent(id: number)
     .subscribe({
       next: (response: any) =>{
         this.studentToSearch = response;
-        console.log('student serched => ' + this.studentToSearch.name)  
+        console.log('student serched => ' + this.studentToSearch)  
+console.log('student serched => ' + this.studentToSearch.id) 
+        console.log('student serched => ' + this.studentToSearch.name) 
       },
       error: (error: any) =>{}
   })

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { studentModel } from '../models/studentModel';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import { Injectable, inject } from '@angular/core';
 export class StudentListService 
 {
   private http = inject(HttpClient);
+  student = new studentModel(0, '');
+  response: any;
   
   constructor() 
   { }
@@ -19,6 +22,11 @@ export class StudentListService
   public getStudent(id: number)
   {
     console.log(id)
+    // this.response =  this.http.get('http://localhost:8000/student/'+id);
+    // this.student.id = this.response.id;
+    // this.student.name = this.response.name;
+    // console.log('ggggggg' + this.http.get('http://localhost:8000/student/'+id));
+    // return this.student;
     return this.http.get('http://localhost:8000/student/'+id);
   }
 
