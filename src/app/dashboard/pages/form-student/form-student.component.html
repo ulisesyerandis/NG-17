@@ -14,10 +14,10 @@
             </div>
         </ng-container>
 
-        <ng-container class="container-newStudent">
-            <h2 class="title2" *ngIf="title === 'Update'"> Update </h2>
+        <ng-container class="container-newStudent" *ngIf="title === 'Update' || title === 'Add Student'">
+            <h2 class="title2" *ngIf="title === 'Update'"> Update </h2>     
             <div class="div-newStudent mb-2 bg-blue-200 rounded shadow p-2">
-                <label for="text" class="label-form"  *ngIf="title === 'Update'">
+                <label for="text" class="label-form"  *ngIf="title === 'Update'">      
                     id:  {{oldStudent.id}}
                 </label>
                 <br />
@@ -30,12 +30,28 @@
                 <div class="alert alert-danger mt-2" [hidden] = "form.get('name')?.valid || form.get('name')?.pristine">
                     The name is required. Please
                 </div>
-                <button mat-button class="btn-save-form bg-blue-500 rounded " [disabled]="form.invalid"
+                <button mat-button class="btn-save-form bg-blue-500 rounded " 
+                    [disabled]="form.invalid"
                     (click)="sendForm()" 
                 > {{buttonTitle}} </button>
             </div>
         </ng-container>
         
+        <ng-container class="container-searchStudent" *ngIf="title === 'Search'">
+            <div class="div-searchStudent mb-2 bg-blue-200 rounded shadow p-2">
+                <!-- <label for="text" class="label-form">    
+                    id:  {{studentToSearchByName.id}}
+                </label> -->
+                <br />
+                <label for="text" class="label-form">
+                    Name: {{studentToSearch.name}}
+                </label>
+                <button mat-button class="btn-save-form bg-blue-500 rounded " 
+                    [disabled]="form.invalid"
+                    (click)="back()" 
+                > {{title}} </button>
+            </div>
+        </ng-container>
     </form>
 </div>
 <router-outlet></router-outlet>

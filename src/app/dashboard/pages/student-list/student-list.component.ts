@@ -38,30 +38,34 @@ export default class StudentListComponent implements OnInit
   public formTitle = inject(FormComponent)
   public studentListService = inject(StudentListService)
 
+  // search = new FormControl('');
+  searchForm = new FormGroup
+  ({
+     'nameInput': new FormControl(),
+  })
+
   studentList: any;
   studentFindIt: any;
   studentDeleted: any;
   studentToUpdate: any; //old student
   studentUpdated: any;  //new student
-  //    to change the title of the FormComponent by the add and update button click       
+  studentToSearch: any; 
+  studentName!: string;
 
   dataSource: any;
   displayedColumns: string[] = [];
 
-  public menuItems = routes
-  .map( routes => routes )
-  .flat()
-  .filter(route => route && route.path )
+  // public menuItems = routes
+  // .map( routes => routes )
+  // .flat()
+  // .filter(route => route && route.path )
   // .filter(routes => routes && routes.path?.includes('form'))
 
-  page_size: number = 3;
-  page_number: number = 1;
-  pageSizeOptions: number [] = [5, 10, 10];
-  paginator!: MatPaginator;
-  paginatorIntl!: MatPaginatorIntl;
-
- search = new FormControl('');
- @Output('search') searchEmitter = new EventEmitter<any>();
+  // page_size: number = 3;
+  // page_number: number = 1;
+  // pageSizeOptions: number [] = [5, 10, 10];
+  // paginator!: MatPaginator;
+  // paginatorIntl!: MatPaginatorIntl;
 
  editable: boolean = false;
  titleForm!: string ;
@@ -78,15 +82,10 @@ public constructor
     this.dataSource = this.studentList;
     this.displayedColumns = ['No','id','name','button'];
 
-  this.paginatorIntl = new MatPaginatorIntl();
-  this.paginatorIntl.itemsPerPageLabel = 'Elementos por página';
-   
-    this.search.valueChanges.subscribe(value => this.searchEmitter.emit(value))
-    console.log("22222 " + this.search.get('search')?.value)
+  // this.paginatorIntl = new MatPaginatorIntl();
+  // this.paginatorIntl.itemsPerPageLabel = 'Elementos por página';
+  
   }
-  // ngAfterViewInit(): void {
-  //   this.dataSource.paginator = this.paginator;
-  // }
 
   handleSearch(value:any)
   {
@@ -94,13 +93,13 @@ public constructor
     console.log(value)
   }
 
-  handlePage(e: PageEvent)
-  {
-    this.page_size = e.pageSize;
-    this.page_number = e.pageIndex + 1;
-console.log("page number "+this.page_number)
-console.log("size "+ this.page_size)
-  }
+//   handlePage(e: PageEvent)
+//   {
+//     this.page_size = e.pageSize;
+//     this.page_number = e.pageIndex + 1;
+// console.log("page number "+this.page_number)
+// console.log("size "+ this.page_size)
+//   }
 
 public FillStudentData(): void
 {
@@ -168,7 +167,6 @@ public findStudent(id: number)
   addButton() 
    { 
     this.titleForm = 'Add Student';
-    this.editable = true;
     console.log('button add clicked');
     // console.log(this.menuItems.at(0)?.children?.at(4)?.path);
   //   console.log(this.menuItems);
@@ -195,6 +193,7 @@ public findStudent(id: number)
   console.log('student = '+ this.studentList)
 //  this.information = {}
 //  JSON.parse(this.titleForm + '.' + this.dataSource.at[this.dataSource.length-1] );
+  this.editable = true; 
   }
 
   updateButton(student: any)
@@ -207,6 +206,41 @@ public findStudent(id: number)
     console.log('student selected to update = ' + student.name);
 
   // console.log('student = '+ this.studentUpdated.name + 'updated successfully')
-
   }
+
+  searchStudentByName( ) 
+  {
+    this.titleForm = 'Search' 
+    console.log(this.titleForm)
+    // this.studentToSearchName = this.searchForm.value
+    console.log('--->' + this.searchForm.value.nameInput)
+    this.studentName= this.searchForm.value.nameInput;
+    console.log('---> student name ' + this.studentName)
+    this.studentListService.getStudentByName(this.studentName)
+    .subscribe({
+      next: (response: any) => {
+        this.studentToSearch = response;
+        console.log('student serched => ' + this.studentToSearch.name)  
+      },
+      error: (error: any) => {}
+    })
+    // this.editable = true;
+  }
+
+  searchStudentById()
+  {
+    this.titleForm = 'Search' 
+    console.log(this.titleForm)
+    // this.studentToSearchName = this.searchForm.value
+    console.log('--->' + this.searchForm.value.nameInput)
+    this.studentListService.getStudent(this.searchForm.value.nameInput)
+    .subscribe({
+      next: (response: any) =>{
+        this.studentToSearch = response;
+        console.log('student serched => ' + this.studentToSearch.name)  
+      },
+      error: (error: any) =>{}
+  })
+  this.editable = true;
+}
 }

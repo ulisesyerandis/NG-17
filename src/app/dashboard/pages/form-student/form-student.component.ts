@@ -25,8 +25,9 @@ export class FormStudentComponent implements OnInit
   title: string = 'Add student';
   buttonTitle!: string;
 
-  @Input()formInfo: string = 'sin nombre';
+  @Input()formName: string = 'sin nombre';
   @Input()studentToUpdate: any;
+  @Input()studentToSearch: any;
   @Output()editable = new EventEmitter<boolean>();
 
   oldStudent: any;
@@ -35,19 +36,24 @@ export class FormStudentComponent implements OnInit
   
   ngOnInit(): void
   {
-     if(this.formInfo === 'Add Student')
+     if(this.formName === 'Add Student')
      {
-      this.title = this.formInfo ;
+      this.title = this.formName ;
       this.buttonTitle = 'Add';
      }
-     else
+     else if(this.formName === 'Update')
      {
-      this.title = this.formInfo;
+      this.title = this.formName;
       this.buttonTitle = 'Update';
       this.form.value.name = this.studentToUpdate.name;
       this.oldStudent = this.studentToUpdate;
       console.log('old student in form.value = ' + this.form.value.name);      
       console.log('old student in oldStudent var = ' + this.oldStudent.name); 
+     }
+     else if (this.formName === 'Search')
+     {
+      this.title = this.formName;
+      this.buttonTitle = 'Accept';
      }
      console.log(this.form.value.name)
   }
@@ -55,7 +61,7 @@ export class FormStudentComponent implements OnInit
   sendForm()
   {
     console.log('help')
-    if(this.formInfo === 'Add Student')
+    if(this.formName === 'Add Student')
     {
       this.studentListService.createStudent(this.form.value).subscribe({
       next: (response: any) => {
@@ -64,7 +70,7 @@ export class FormStudentComponent implements OnInit
       error: (error: any) => { }
     });
     }
-    else if(this.formInfo === 'Update')
+    else if(this.formName === 'Update')
     {
       this.newStudent = this.form.value;
       console.log('id of old student= ' + this.oldStudent.id);
@@ -82,4 +88,10 @@ export class FormStudentComponent implements OnInit
     this.editable.emit(false);
     return this.form.value;
   }
+
+  back() 
+    {
+      this.editable.emit(false);
+      console.log('back')
+    }
 }

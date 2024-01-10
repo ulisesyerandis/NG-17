@@ -1,19 +1,25 @@
 <ng-container *ngIf="!editable; else editar">
 <h1 title="Student List" (search)="handleSearch($event)"></h1>
 <section>
-    <div class="demo-button-container">         
+    <div class="div-add-button">         
       <button mat-button id="add-student" class="btn-add" 
       (click)="addButton() ">
         Add Student
       </button>
-      <!-- <mat-form-field class="mat-form-field" >
-        <input [formControl]="search" matInput placeholder=" Search">
-      </mat-form-field> -->
+    
+      <mat-form-field class="mat-form-field" >
+        <div [formGroup]="searchForm">
+          <input type="number" formControlName = 'nameInput' matInput placeholder=" Search">
+        </div>        
+      </mat-form-field> 
       
-      <!-- <label class="label-find"> 
-        <input class = "input-find" placeholder="find" />
-        <button class="rounded btn-find"> Find </button>
-      </label> -->
+      <label class="label-find"> 
+        <!-- <input class = "input-find" placeholder="find" /> -->
+        <button class="rounded btn-find" 
+        (click)="searchStudentById()"
+        > Find </button>
+      </label>
+     
     </div>
 </section>
 
@@ -69,7 +75,31 @@
 </ng-container>
 
 <ng-template #editar>
-  <app-form-student [formInfo]="titleForm" [studentToUpdate]="studentToUpdate" (editable)="editable = $event"> </app-form-student>
+
+  @defer (when titleForm === 'Update') 
+  {
+  <app-form-student 
+        [formName]="titleForm"      
+        [studentToUpdate]="studentToUpdate"  
+        (editable)="editable = $event"
+  > </app-form-student>
+  }
+  @defer (when titleForm === 'Add Student')
+   {
+      <app-form-student 
+        [formName]="titleForm"       
+        (editable)="editable = $event"
+      > </app-form-student>
+   }
+   @defer (when titleForm === 'Search') 
+   {
+      <app-form-student 
+        [formName]="titleForm"    
+        [studentToSearch]="studentToSearch"   
+        (editable)="editable = $event"
+      > </app-form-student>
+   }
+ 
   <!-- <button (click)="editable = false" class="btn-op bg-blue-300">Add</button> -->
 </ng-template>
 

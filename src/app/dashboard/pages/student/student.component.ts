@@ -2,10 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, NgModule, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TitleComponent } from '@shared/title/title.component';
-import { StudentService } from '../../../services/student.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-
 import { ViewChild} from '@angular/core';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
@@ -34,7 +31,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   imports: 
   [
     CommonModule, TitleComponent, RouterModule, 
-    MatCardModule,MatButtonModule, MatTableModule
+    MatCardModule,MatButtonModule, MatTableModule,
   ],
   templateUrl: './student.component.html',
   styleUrl: './student.component.css'

@@ -92,6 +92,7 @@
     margin-left: 8px;
     border-color: black;
     height: 35px;
+    /* padding-right:100px; */
 }
 
 .btn-find
@@ -109,5 +110,5 @@
 
 .mat-form-field
 {
-    /* width: 100%; */
+    padding-left: 576px;
 }
