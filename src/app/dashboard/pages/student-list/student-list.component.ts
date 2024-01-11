@@ -50,7 +50,7 @@ export default class StudentListComponent implements OnInit
   studentDeleted: any;
   studentToUpdate: any; //old student
   studentUpdated: any;  //new student
-  studentToSearch!: studentModel;
+  studentToSearch: any;
   studentName!: string;
 
   dataSource: any;
@@ -89,11 +89,11 @@ public constructor
   
   }
 
-  handleSearch(value:any)
-  {
-    console.log("lllllllllllll")
-    console.log(value)
-  }
+  // handleSearch(value:any)
+  // {
+  //   console.log("lllllllllllll")
+  //   console.log(value)
+  // }
 
 //   handlePage(e: PageEvent)
 //   {
@@ -115,7 +115,7 @@ public FillStudentData(): void
           // console.log(error)
       },
   });
-  console.log(this.studentList + ' cant');
+  // --console.log(this.studentList + ' cant');
 }
 
 //      CRUD -> get()     
@@ -125,10 +125,9 @@ public findStudent(id: number)
   this.studentListService.getStudent(id).subscribe({
     next: (response: any) =>{
       this.studentFindIt = response;
-      console.log("student find it")
+      //-- console.log("student find it")
     },
     error:(error: any) =>{
-
     },
   });
 }
@@ -138,12 +137,11 @@ public findStudent(id: number)
     this.studentListService.deleteStudent(id).subscribe({
       next: (response: any) =>{
         this.studentDeleted = response;
-        console.log("student " + this.studentDeleted.name + " deleted successfuly")
+        // --console.log("student " + this.studentDeleted.name + " deleted successfuly")
         this.ngOnChanges(this.studentList);
         location.reload();
       },
       error:(error: any) =>{
-
       },
     }); 
   }
@@ -157,7 +155,7 @@ public findStudent(id: number)
   addButton() 
    { 
     this.titleForm = 'Add Student';
-    console.log('button add clicked');
+    // --console.log('button add clicked');
     // console.log(this.menuItems.at(0)?.children?.at(4)?.path);
   //   console.log(this.menuItems);
   //   console.log("titulo = " + buttontitle);
@@ -179,8 +177,8 @@ public findStudent(id: number)
   //   }
   // //  console.log(this.formRoutes.navigate(['./dashboard/pages/form/form.component']));
   // }
-  console.log('titulo = '+ this.titleForm);
-  console.log('student = '+ this.studentList)
+  // --console.log('titulo = '+ this.titleForm);
+  // --console.log('student = '+ this.studentList)
 //  this.information = {}
 //  JSON.parse(this.titleForm + '.' + this.dataSource.at[this.dataSource.length-1] );
   this.editable = true; 
@@ -190,10 +188,10 @@ public findStudent(id: number)
   {
     this.titleForm = 'Update';
     this.editable = true;
-    console.log('button update clicked');
+    // --console.log('button update clicked');
     this.studentToUpdate = student;
-    console.log('student selected to update = ' + this.studentToUpdate.name);
-    console.log('student selected to update = ' + student.name);
+    // --console.log('student selected to update = ' + this.studentToUpdate.name);
+    // --console.log('student selected to update = ' + student.name);
 
   // console.log('student = '+ this.studentUpdated.name + 'updated successfully')
   }
@@ -201,16 +199,16 @@ public findStudent(id: number)
   searchStudentByName( ) 
   {
     this.titleForm = 'Search' 
-    console.log(this.titleForm)
+    // --console.log(this.titleForm)
     // this.studentToSearchName = this.searchForm.value
-    console.log('--->' + this.searchForm.value.nameInput)
+    // --console.log('--->' + this.searchForm.value.nameInput)
     this.studentName= this.searchForm.value.nameInput;
-    console.log('---> student name ' + this.studentName)
+    // --console.log('---> student name ' + this.studentName)
     this.studentListService.getStudentByName(this.studentName)
     .subscribe({
       next: (response: any) => {
         this.studentToSearch = response;
-        console.log('student serched => ' + this.studentToSearch.name)  
+        // --console.log('student serched => ' + this.studentToSearch.name)  
       },
       error: (error: any) => {}
     })
@@ -220,19 +218,25 @@ public findStudent(id: number)
   searchStudentById()
   {
     this.titleForm = 'Search' 
-    console.log(this.titleForm)
+    // --console.log(this.titleForm)
     // this.studentToSearchName = this.searchForm.value
-    console.log('--->' + this.searchForm.value.nameInput)
-    this.studentListService.getStudent(this.searchForm.value.nameInput)
+    // --console.log('--->' + this.searchForm.value.nameInput)
+    
+      this.studentListService.getStudent(this.searchForm.value.nameInput)
     .subscribe({
       next: (response: any) =>{
         this.studentToSearch = response;
-        console.log('student serched => ' + this.studentToSearch)  
-console.log('student serched => ' + this.studentToSearch.id) 
-        console.log('student serched => ' + this.studentToSearch.name) 
+        // --console.log('student serched => ' + this.studentToSearch)  
+        // --console.log('student serched id => ' + this.studentToSearch.id) 
+        // --console.log('student serched name => ' + this.studentToSearch.name)      
+        if(this.studentToSearch === 'Student not found')
+  {
+    // --console.log('student not found'); 
+    this.studentToSearch = new studentModel(0, 'student not found');
+  }
       },
       error: (error: any) =>{}
   })
   this.editable = true;
-}
+    }
 }

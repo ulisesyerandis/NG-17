@@ -49,8 +49,8 @@ export class FormStudentComponent implements OnInit
       this.buttonTitle = 'Update';
       this.form.value.name = this.studentToUpdate.name;
       this.oldStudent = this.studentToUpdate;
-      console.log('old student in form.value = ' + this.form.value.name);      
-      console.log('old student in oldStudent var = ' + this.oldStudent.name); 
+      // --console.log('old student in form.value = ' + this.form.value.name);      
+      // --console.log('old student in oldStudent var = ' + this.oldStudent.name); 
      }
      else if (this.formName === 'Search')
      {
@@ -59,10 +59,10 @@ export class FormStudentComponent implements OnInit
       // if(this.studentToSearch)
       const timer = setTimeout(() => 
         {
-        console.log(`1 second ago, the user became `);
+        // --console.log(`1 second ago, the user became `);
         this.studentName = this.studentToSearch.name;
-      console.log( this.studentName)
-      console.log('klvgnsgva');  
+      // --console.log( this.studentName)
+      // --console.log('klvgnsgva');  
         }, 2000);
 
         onCleanup(() => 
@@ -91,12 +91,12 @@ export class FormStudentComponent implements OnInit
 
   sendForm()
   {
-    console.log('help')
+    // --console.log('help')
     if(this.formName === 'Add Student')
     {
       this.studentListService.createStudent(this.form.value).subscribe({
       next: (response: any) => {
-        console.log("student " + this.form.get('name')?.value + " created successfuly")
+        // --console.log("student " + this.form.get('name')?.value + " created successfuly")
       },
       error: (error: any) => { }
     });
@@ -104,31 +104,30 @@ export class FormStudentComponent implements OnInit
     else if(this.formName === 'Update')
     {
       this.newStudent = this.form.value;
-      console.log('id of old student= ' + this.oldStudent.id);
-      console.log('new student ' + this.newStudent.name);
+      // --console.log('id of old student= ' + this.oldStudent.id);
+      //-- console.log('new student ' + this.newStudent.name);
       this.studentListService.updateStudent(this.oldStudent.id, this.newStudent)
       .subscribe({
         next: (response: any) =>{
           this.studentUpdated = response;
-          console.log("student " + this.studentUpdated.name + " updated successfuly")
+          // --console.log("student " + this.studentUpdated.name + " updated successfuly")
         },
         error:(error: any) =>{
         },
       });
     }
-    
     this.editable.emit(false);
     return this.form.value;
   }
 
   back() 
     {
-      console.log('back 1')
+      // --console.log('back 1')
       this.editable.emit(false);
-      console.log('back')
+      // --console.log('back')
     }
 }
 function onCleanup(arg0: () => void) {
-  console.log('timer deleted');
+  // --console.log('timer deleted');
 }
 

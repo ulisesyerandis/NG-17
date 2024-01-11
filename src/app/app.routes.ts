@@ -40,24 +40,24 @@ export const routes: Routes =
             //     title:'Defer Views',
             //     loadComponent: () => import('./dashboard/pages/defer-views/defer-views.component')
             // },
-            {
-                path:'student/:id',
-                title:'Add Student',
-                // loadComponent: () => import('./dashboard/pages/student/student.component'),
-                component: StudentComponent
-            },
+            // {
+            //     path:'student/:id',
+            //     title:'Add Student',
+            //     // loadComponent: () => import('./dashboard/pages/student/student.component'),
+            //     component: StudentComponent
+            // },
             {
                 path:'student-list',
                 title:'Student List',
                 // loadComponent: () => import('./dashboard/pages/student-list/student-list.component'),
                 component: StudentListComponent
             },
-            {
-                path:'find-student',
-                title:'Find Student',
-                // loadComponent: () => import('./dashboard/pages/find-student/find-student.component'),
-                component: findStudentComponent
-            },
+            // {
+            //     path:'find-student',
+            //     title:'Find Student',
+            //     // loadComponent: () => import('./dashboard/pages/find-student/find-student.component'),
+            //     component: findStudentComponent
+            // },
             // {
             //     path:'user-list',
             //     title:'User List',
@@ -86,11 +86,11 @@ export const routes: Routes =
         redirectTo:'/dashboard',
         pathMatch:'full'
      },
-     {        
-        path: 'form',
-        component: FormComponent,
-        // loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
-     },
+    //  {        
+    //     path: 'form',
+    //     component: FormComponent,
+    //     // loadComponent: ()=> import( './dashboard/pages/form/form.component' ),
+    //  },
      {
         path: 'formStudent',
      component: FormStudentComponent,

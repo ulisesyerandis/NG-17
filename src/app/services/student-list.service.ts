@@ -21,12 +21,7 @@ export class StudentListService
 
   public getStudent(id: number)
   {
-    console.log(id)
-    // this.response =  this.http.get('http://localhost:8000/student/'+id);
-    // this.student.id = this.response.id;
-    // this.student.name = this.response.name;
-    // console.log('ggggggg' + this.http.get('http://localhost:8000/student/'+id));
-    // return this.student;
+    // --console.log(id)
     return this.http.get('http://localhost:8000/student/'+id);
   }
 
