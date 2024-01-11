@@ -56,9 +56,20 @@ export class FormStudentComponent implements OnInit
      {
       this.title = this.formName;
       this.buttonTitle = 'Accept';
-      this.studentName = this.studentToSearch.name;
+      // if(this.studentToSearch)
+      const timer = setTimeout(() => 
+        {
+        console.log(`1 second ago, the user became `);
+        this.studentName = this.studentToSearch.name;
       console.log( this.studentName)
-      console.log('klvgnsgva');     
+      console.log('klvgnsgva');  
+        }, 2000);
+
+        onCleanup(() => 
+          {
+          clearTimeout(timer);
+          });
+         
      }
   }
 
@@ -117,3 +128,7 @@ export class FormStudentComponent implements OnInit
       console.log('back')
     }
 }
+function onCleanup(arg0: () => void) {
+  console.log('timer deleted');
+}
+

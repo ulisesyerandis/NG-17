@@ -38,7 +38,7 @@
         </ng-container>
         
         <ng-container class="container-searchStudent" *ngIf="title === 'Search'">
-            <div class="div-searchStudent mb-2 bg-blue-200 rounded shadow p-2">
+            <div class="div-searchStudent mb-2 bg-blue-200 rounded shadow p-2" *ngIf="studentToSearch">
                 <label for="text" class="label-form">    
                     id:  {{studentToSearch.id}}
                 </label>
