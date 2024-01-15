@@ -1,5 +1,5 @@
 import { CommonModule, NgFor } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output, SimpleChanges, ViewChild, inject, signal } from '@angular/core';
+import { Component, OnInit, SimpleChanges, inject,ChangeDetectorRef } from '@angular/core';
 import { TitleComponent } from '@shared/title/title.component';
 import { StudentListService } from '../../../services/student-list.service';
 import { HttpClient } from '@angular/common/http';
@@ -19,6 +19,8 @@ import ControlFlowComponent from '../main-view/main-view.component';
 import DashboardComponent from '../../dashboard.component';
 import { FormStudentComponent } from '../form-student/form-student.component';
 import { studentModel } from '../../../models/studentModel';
+import { ToastComponent } from '@shared/toast/toast/toast.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-list',
@@ -29,15 +31,15 @@ import { studentModel } from '../../../models/studentModel';
     MatCardModule, MatButtonModule, MatTableModule,
     MatPaginatorModule, MatFormFieldModule, MatInputModule,
     ReactiveFormsModule,FormComponent, ControlFlowComponent,
-    DashboardComponent, FormStudentComponent,
+    DashboardComponent, FormStudentComponent, ToastComponent
   ],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
 export default class StudentListComponent implements OnInit
 {
-  public formTitle = inject(FormComponent)
   public studentListService = inject(StudentListService)
+  // public toast = inject(ToastComponent)
 
   // search = new FormControl('');
   searchForm = new FormGroup
@@ -52,6 +54,7 @@ export default class StudentListComponent implements OnInit
   studentUpdated: any;  //new student
   studentToSearch: any;
   studentName!: string;
+  refresh: boolean = false;
 
   dataSource: any;
   displayedColumns: string[] = [];
@@ -69,13 +72,17 @@ export default class StudentListComponent implements OnInit
   // paginatorIntl!: MatPaginatorIntl;
 
  editable: boolean = false;
+ reload: boolean = false;
  titleForm!: string ;
  defaultValue = 0;
+ deleted: boolean = false;
 // information: JSON = { }
 
 public constructor
 (
   private formRoutes: Router,
+  private cdr: ChangeDetectorRef,
+  private toast: ToastComponent,
 )
 {}
   ngOnInit(): void 
@@ -86,7 +93,11 @@ public constructor
 
   // this.paginatorIntl = new MatPaginatorIntl();
   // this.paginatorIntl.itemsPerPageLabel = 'Elementos por página';
-  
+        // this method is for detect changes, it will be ejecuting every  1sec
+    // setInterval(() =>{
+    //   console.log('vdetectando cambio')
+    //   this.cdr.detectChanges();
+    // }, 1000);
   }
 
   // handleSearch(value:any)
@@ -102,6 +113,17 @@ public constructor
 // console.log("page number "+this.page_number)
 // console.log("size "+ this.page_size)
 //   }
+
+ngAfterViewChecked() 
+{
+  console.log('view student list = ' + this.refresh.valueOf() )
+  if(this.refresh)
+  {
+    this.ngOnChanges(this.studentList);
+            location.reload();
+            console.log('refresh')
+  }
+}
 
 public FillStudentData(): void
 {
@@ -134,21 +156,43 @@ public findStudent(id: number)
 
   public deleteStudent(id: number)
   {
-    this.studentListService.deleteStudent(id).subscribe({
-      next: (response: any) =>{
-        this.studentDeleted = response;
-        // --console.log("student " + this.studentDeleted.name + " deleted successfuly")
-        this.ngOnChanges(this.studentList);
-        location.reload();
-      },
-      error:(error: any) =>{
-      },
-    }); 
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) 
+      {
+        this.studentListService.deleteStudent(id).subscribe({
+          next: (response: any) =>{
+            this.studentDeleted = response;
+            // --console.log("student " + this.studentDeleted.name + " deleted successfuly")
+            this.ngOnChanges(this.studentList);
+            location.reload();
+          },
+          error:(error: any) =>{
+          },
+        }); 
+         
+        this.deleted = true;
+        Swal.fire({
+          title: "Deleted!",
+          text: "The student "+ this.studentDeleted.name + " has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['studentList']) {
       this.dataSource = this.studentList;
+      
     }
   }
 
@@ -232,7 +276,7 @@ public findStudent(id: number)
         if(this.studentToSearch === 'Student not found')
   {
     // --console.log('student not found'); 
-    this.studentToSearch = new studentModel(0, 'student not found');
+    this.studentToSearch = new studentModel('', 'student not found');
   }
       },
       error: (error: any) =>{}

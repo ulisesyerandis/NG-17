@@ -17,20 +17,22 @@ import FormComponent from './dashboard/pages/form/form.component';
 import StudentListComponent from './dashboard/pages/student-list/student-list.component';
 import ControlFlowComponent from './dashboard/pages/main-view/main-view.component';
 import { FormStudentComponent } from './dashboard/pages/form-student/form-student.component';
+import { ToastComponent } from '@shared/toast/toast/toast.component';
  
 export const appConfig: ApplicationConfig = 
 {
   providers: 
   [
     provideRouter(routes),
+    //    importProvidersFrom -> can't be standalone 
     importProvidersFrom(HttpClientModule, FormsModule, NgModule, 
       BrowserModule, ReactiveFormsModule, 
       MatCardModule, MatTableModule, MatTable,
       MatPaginatorModule, MatFormFieldModule, MatInputModule,
-      NoopAnimationsModule, MatPaginator
+      NoopAnimationsModule, MatPaginator, 
       ),
       FormComponent, StudentListComponent, ControlFlowComponent,
-      FormStudentComponent
+      FormStudentComponent,ToastComponent
   ],
 
 }

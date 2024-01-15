@@ -8,7 +8,7 @@ import { studentModel } from '../models/studentModel';
 export class StudentListService 
 {
   private http = inject(HttpClient);
-  student = new studentModel(0, '');
+  // student = new studentModel(0, '');
   response: any;
   
   constructor() 

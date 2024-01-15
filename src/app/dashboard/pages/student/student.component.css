@@ -11,3 +11,19 @@
   margin-right: 8px;
 }
 
+.container
+{
+  background-color: #333;
+  height: 30vh;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-flow: column wrap;
+  /* padding: 1rem; */
+}
+
+.item
+{
+  background-color: #666;
+}

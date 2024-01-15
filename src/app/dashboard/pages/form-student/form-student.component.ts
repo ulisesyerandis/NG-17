@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormControlNam
 import { RouterModule } from '@angular/router';
 import { StudentListService } from '../../../services/student-list.service';
 import { studentModel } from '../../../models/studentModel';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form-student',
@@ -30,6 +31,7 @@ export class FormStudentComponent implements OnInit
   @Input()studentToUpdate: any;
   @Input()studentToSearch!: studentModel;
   @Output()editable = new EventEmitter<boolean>();
+  @Output()refrechTable = new EventEmitter<boolean>();
 
   oldStudent: any;
   newStudent: any;
@@ -97,27 +99,66 @@ export class FormStudentComponent implements OnInit
       this.studentListService.createStudent(this.form.value).subscribe({
       next: (response: any) => {
         // --console.log("student " + this.form.get('name')?.value + " created successfuly")
+        this.refrechTable.emit(true);
       },
       error: (error: any) => { }
     });
+    Swal.fire({
+      title: this.form.value.name + '',
+      text: 'Has been adding successfully',
+      icon: 'success'
+    });
+    this.refrechTable.emit(true);
+          // console.log('refresh form = ' + this.refrechTable.emit);
+    this.editable.emit(false);
     }
     else if(this.formName === 'Update')
     {
       this.newStudent = this.form.value;
-      // --console.log('id of old student= ' + this.oldStudent.id);
-      //-- console.log('new student ' + this.newStudent.name);
-      this.studentListService.updateStudent(this.oldStudent.id, this.newStudent)
-      .subscribe({
-        next: (response: any) =>{
-          this.studentUpdated = response;
-          // --console.log("student " + this.studentUpdated.name + " updated successfuly")
-        },
-        error:(error: any) =>{
-        },
+      console.log(this.studentToUpdate.name + '->' + this.newStudent.name,)
+      Swal.fire({
+        title: "Are you sure you want to modify the student ",
+        text: this.studentToUpdate.name + " -> " + this.newStudent.name + "?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+      }).then((result) => {
+        if (result.isConfirmed) 
+        {
+          this.update();
+          Swal.fire({
+            title: "Updated!",
+            text: "The student has been updated.",
+            icon: "success"
+          });
+          this.refrechTable.emit(true);
+          console.log('refresh');
+          this.editable.emit(false);
+        } else if(result.isDismissed)
+        {
+          console.log('dissmised')
+        }
       });
     }
-    this.editable.emit(false);
+    
     return this.form.value;
+  }
+
+  update()
+  {
+    // --console.log('id of old student= ' + this.oldStudent.id);
+    //-- console.log('new student ' + this.newStudent.name);
+    this.studentListService.updateStudent(this.oldStudent.id, this.newStudent)
+    .subscribe({
+      next: (response: any) =>{
+        this.studentUpdated = response;
+        // --console.log("student " + this.studentUpdated.name + " updated successfuly")
+      },
+      error:(error: any) =>{
+      },
+    });
   }
 
   back() 

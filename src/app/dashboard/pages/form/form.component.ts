@@ -53,13 +53,13 @@ export default class FormComponent implements OnInit
   sendForm(routeToGo: string)
   {
     // console.log(this.form.value)
-    this.studentListService.createStudent(this.form.value).subscribe({
-      next: (response: any) => {
-        console.log("student " + this.form.get('name')?.value + " created successfuly")
-      },
-      error: (error: any) => { }
-    });
-    this.goTo(routeToGo);
+    // this.studentListService.createStudent(this.form.value).subscribe({
+    //   next: (response: any) => {
+    //     console.log("student " + this.form.get('name')?.value + " created successfuly")
+    //   },
+    //   error: (error: any) => { }
+    // });
+    // this.goTo(routeToGo);
     return this.form.value;
   }
 

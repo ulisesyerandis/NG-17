@@ -1,5 +1,5 @@
 <ng-container *ngIf="!editable; else editar">
-<h1 title="Student List" (search)="handleSearch($event)"></h1>
+<h1 title="Student List"></h1>
 <section>
     <div class="div-add-button">         
       <button mat-button id="add-student" class="btn-add" 
@@ -75,6 +75,7 @@
 </mat-paginator>
 {{dataSource.length| json }} -->
 <!-- <button (click)="editable = true " class="btn-op">Add Student</button> -->
+
 </ng-container>
 
 <ng-template #editar>
@@ -84,13 +85,15 @@
   <app-form-student 
         [formName]="titleForm"      
         [studentToUpdate]="studentToUpdate"  
+        (refrechTable)="refresh = $event"
         (editable)="editable = $event"
   > </app-form-student>
   }
   @defer (when titleForm === 'Add Student')
    {
       <app-form-student 
-        [formName]="titleForm"       
+        [formName]="titleForm"    
+        (refrechTable)="refresh = $event"   
         (editable)="editable = $event"
       > </app-form-student>
    }
@@ -105,5 +108,9 @@
  
   <!-- <button (click)="editable = false" class="btn-op bg-blue-300">Add</button> -->
 </ng-template>
+@defer (when deleted === true)
+{
+  <app-toast > </app-toast>
+}
 
 <router-outlet></router-outlet>

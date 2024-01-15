@@ -40,12 +40,12 @@ export const routes: Routes =
             //     title:'Defer Views',
             //     loadComponent: () => import('./dashboard/pages/defer-views/defer-views.component')
             // },
-            // {
-            //     path:'student/:id',
-            //     title:'Add Student',
-            //     // loadComponent: () => import('./dashboard/pages/student/student.component'),
-            //     component: StudentComponent
-            // },
+            {
+                path:'student/:id',
+                title:'Add Student',
+                // loadComponent: () => import('./dashboard/pages/student/student.component'),
+                component: StudentComponent
+            },
             {
                 path:'student-list',
                 title:'Student List',
