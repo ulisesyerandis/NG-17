@@ -112,3 +112,8 @@
 {
     padding-left: 576px;
 }
+
+.section-studentList
+{
+    flex-shrink: 1;
+}

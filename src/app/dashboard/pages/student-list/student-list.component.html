@@ -1,6 +1,6 @@
 <ng-container *ngIf="!editable; else editar">
 <h1 title="Student List"></h1>
-<section>
+<section class="section-studentList">
     <div class="div-add-button">         
       <button mat-button id="add-student" class="btn-add" 
       (click)="addButton() ">
@@ -9,9 +9,8 @@
     
       <mat-form-field class="mat-form-field" >
         <div [formGroup]="searchForm">
-          <input type="number" formControlName = 'nameInput' 
+          <input type="text" formControlName = 'nameInput' 
           matInput 
-          [(ngModel)]="defaultValue"
           >
         </div>        
       </mat-form-field> 
@@ -19,7 +18,7 @@
       <label class="label-find"> 
         <!-- <input class = "input-find" placeholder="find" /> -->
         <button class="rounded btn-find" 
-        (click)="searchStudentById()"
+        (click)="searchStudent()"
         > Find </button>
       </label>
      

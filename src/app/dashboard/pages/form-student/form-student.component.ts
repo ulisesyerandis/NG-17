@@ -29,14 +29,15 @@ export class FormStudentComponent implements OnInit
 
   @Input()formName: string = 'sin nombre';
   @Input()studentToUpdate: any;
-  @Input()studentToSearch!: studentModel;
+  @Input()studentToSearch!: string;
   @Output()editable = new EventEmitter<boolean>();
   @Output()refrechTable = new EventEmitter<boolean>();
 
   oldStudent: any;
   newStudent: any;
   studentUpdated: any;
-  studentName: string = 'juan';
+  studentSearched: any;
+  // studentName: string = 'juan';
   
   ngOnInit(): void
   {
@@ -58,59 +59,79 @@ export class FormStudentComponent implements OnInit
      {
       this.title = this.formName;
       this.buttonTitle = 'Accept';
+      this.studentSearched = new studentModel('Loading','Loading');
+      this.searchStudent()
+      
       // if(this.studentToSearch)
-      const timer = setTimeout(() => 
-        {
-        // --console.log(`1 second ago, the user became `);
-        this.studentName = this.studentToSearch.name;
-      // --console.log( this.studentName)
-      // --console.log('klvgnsgva');  
-        }, 2000);
+      // const timer = setTimeout(() => 
+      //   {
+      //   console.log(`1 second ago, the user became `);
+      //   this.studentName = this.studentToSearch;
+      // console.log( this.studentName)
+      // console.log('klvgnsgva');  
+      //   }, 2000);
 
-        onCleanup(() => 
-          {
-          clearTimeout(timer);
-          });
+      //   onCleanup(() => 
+      //     {
+      //     clearTimeout(timer);
+      //     });
          
      }
   }
-
-  // async someFunction() {
-  //   await this.waitForStudentName();
-  //   console.log(this.studentToSearch.name) 
-  // }
-  
-  // waitForStudentName(): Promise<void> {
-  //   return new Promise<void>((resolve) => {
-  //     const interval = setInterval(() => {
-  //       if (this.studentToSearch) {
-  //         clearInterval(interval);
-  //         resolve();
-  //       }
-  //     }, 100);
-  //   });
-  // }
+searchStudent()
+{
+  console.log("formStudent: student to search = " + this.studentToSearch)
+      this.studentListService.getStudent(this.studentToSearch+"")
+    .subscribe({
+      next: (response: any) =>
+      {
+        this.studentSearched = response;
+        console.log('student serched => ' + this.studentSearched)  
+        console.log('student serched id => ' + this.studentSearched.id) 
+        console.log('student serched name => ' + this.studentSearched.name)      
+      },
+      error: (error: any) =>
+      {
+        console.log("error")
+      }
+  })
+}
 
   sendForm()
   {
     // --console.log('help')
     if(this.formName === 'Add Student')
     {
-      this.studentListService.createStudent(this.form.value).subscribe({
-      next: (response: any) => {
-        // --console.log("student " + this.form.get('name')?.value + " created successfuly")
-        this.refrechTable.emit(true);
-      },
-      error: (error: any) => { }
-    });
-    Swal.fire({
-      title: this.form.value.name + '',
-      text: 'Has been adding successfully',
-      icon: 'success'
-    });
-    this.refrechTable.emit(true);
-          // console.log('refresh form = ' + this.refrechTable.emit);
-    this.editable.emit(false);
+
+      Swal.fire({
+        title: "Do you wish add the student?",
+        text: this.form.value.name + "!",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!!!"
+      }).then((result) => {
+        if (result.isConfirmed) 
+        {
+          this.studentListService.createStudent(this.form.value).subscribe({
+            next: (response: any) => { },
+            error: (error: any) => { }
+          });
+          Swal.fire({
+            title: this.form.value.name + '',
+            text: 'Has been adding successfully',
+            icon: 'success'
+          }).then((result) => 
+          {
+            if(result.isConfirmed)
+            {
+              this.refrechTable.emit(true);
+              this.editable.emit(false);
+            }
+          });
+        }
+      });
     }
     else if(this.formName === 'Update')
     {
@@ -131,18 +152,19 @@ export class FormStudentComponent implements OnInit
           Swal.fire({
             title: "Updated!",
             text: "The student has been updated.",
-            icon: "success"
-          });
-          this.refrechTable.emit(true);
-          console.log('refresh');
-          this.editable.emit(false);
-        } else if(result.isDismissed)
-        {
-          console.log('dissmised')
-        }
+            icon: "success",
+          }).then((result) =>
+          {
+            if (result.isConfirmed)
+          {
+            this.refrechTable.emit(true);
+            console.log('refresh');
+            this.editable.emit(false);
+          }
+          }); 
+        } else if(result.isDismissed){ }
       });
     }
-    
     return this.form.value;
   }
 

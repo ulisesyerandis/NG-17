@@ -19,16 +19,27 @@ export class StudentListService
     return this.http.get('http://localhost:8000/student');
   }
 
-  public getStudent(id: number)
+  public getStudent(id: string)
   {
     // --console.log(id)
+    // return this.http.get('http://localhost:8000/student/'+id);
+    // let url: string;
+  if (!isNaN(Number(id))) 
+  {
+    console.log("is a number ");
+    return this.http.get(`http://localhost:8000/student/${id}`);
+  } else {
+    // url = `http://localhost:8000/student/+id`;
+    // console.log(url);
+    console.log("is a name ");
     return this.http.get('http://localhost:8000/student/'+id);
+  }
   }
 
   public getStudentByName(name: string)
   {
     console.log(name)
-    return this.http.get('http://localhost:8000/student/'+name);
+    return this.http.get('http://localhost:8000/student/'+"name");
   }
 
   public createStudent(student: any)

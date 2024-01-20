@@ -40,17 +40,22 @@
         <ng-container class="container-searchStudent" *ngIf="title === 'Search'">
             <div class="div-searchStudent mb-2 bg-blue-200 rounded shadow p-2" *ngIf="studentToSearch">
                 <label for="text" class="label-form">    
-                    id:  {{studentToSearch.id}}
+                    id:  {{studentSearched.id}}
                 </label>
                 <br />
                 <label for="text" class="label-form">
-                    Name: {{studentToSearch.name}}
+                    Name: {{studentSearched.name}}
                 </label>
                 <button mat-button class="btn-save-form bg-blue-500 rounded " 
                     (click)="back()" 
                 > {{buttonTitle}} </button>
             </div>
         </ng-container>
+        <button class="back bg-red-500 rounded" 
+        (click)="back()"
+        >
+            Back
+        </button>
     </form>
 </div>
 <router-outlet></router-outlet>

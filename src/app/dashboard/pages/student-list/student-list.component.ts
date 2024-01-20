@@ -52,8 +52,8 @@ export default class StudentListComponent implements OnInit
   studentDeleted: any;
   studentToUpdate: any; //old student
   studentUpdated: any;  //new student
-  studentToSearch: any;
-  studentName!: string;
+  studentToSearch!: string;
+  studentName: string = 'juan';
   refresh: boolean = false;
 
   dataSource: any;
@@ -142,17 +142,17 @@ public FillStudentData(): void
 
 //      CRUD -> get()     
 //      Luego de crear el ormulario crear la vista para mostrar el estudiante 
-public findStudent(id: number)
-{
-  this.studentListService.getStudent(id).subscribe({
-    next: (response: any) =>{
-      this.studentFindIt = response;
-      //-- console.log("student find it")
-    },
-    error:(error: any) =>{
-    },
-  });
-}
+// public findStudent(id: number)
+// {
+//   this.studentListService.getStudent(id).subscribe({
+//     next: (response: any) =>{
+//       this.studentFindIt = response;
+//       //-- console.log("student find it")
+//     },
+//     error:(error: any) =>{
+//     },
+//   });
+// }
 
   public deleteStudent(id: number)
   {
@@ -240,47 +240,11 @@ public findStudent(id: number)
   // console.log('student = '+ this.studentUpdated.name + 'updated successfully')
   }
 
-  searchStudentByName( ) 
+  searchStudent()
   {
     this.titleForm = 'Search' 
-    // --console.log(this.titleForm)
-    // this.studentToSearchName = this.searchForm.value
-    // --console.log('--->' + this.searchForm.value.nameInput)
-    this.studentName= this.searchForm.value.nameInput;
-    // --console.log('---> student name ' + this.studentName)
-    this.studentListService.getStudentByName(this.studentName)
-    .subscribe({
-      next: (response: any) => {
-        this.studentToSearch = response;
-        // --console.log('student serched => ' + this.studentToSearch.name)  
-      },
-      error: (error: any) => {}
-    })
-    // this.editable = true;
+    this.studentToSearch = this.searchForm.value.nameInput;
+    console.log("student to serach = " + this.studentToSearch)
+    this.editable = true;
   }
-
-  searchStudentById()
-  {
-    this.titleForm = 'Search' 
-    // --console.log(this.titleForm)
-    // this.studentToSearchName = this.searchForm.value
-    // --console.log('--->' + this.searchForm.value.nameInput)
-    
-      this.studentListService.getStudent(this.searchForm.value.nameInput)
-    .subscribe({
-      next: (response: any) =>{
-        this.studentToSearch = response;
-        // --console.log('student serched => ' + this.studentToSearch)  
-        // --console.log('student serched id => ' + this.studentToSearch.id) 
-        // --console.log('student serched name => ' + this.studentToSearch.name)      
-        if(this.studentToSearch === 'Student not found')
-  {
-    // --console.log('student not found'); 
-    this.studentToSearch = new studentModel('', 'student not found');
-  }
-      },
-      error: (error: any) =>{}
-  })
-  this.editable = true;
-    }
 }
