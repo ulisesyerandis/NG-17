@@ -7,7 +7,7 @@ import { TitleComponent } from '@shared/title/title.component';
     standalone: true,
     imports: [CommonModule, TitleComponent,  ],
     templateUrl: './change-detection.component.html',
-    styles: ``
+    styleUrl: './change-detection.component.css'
 })
 export default class ChangeDetectionComponent 
 {

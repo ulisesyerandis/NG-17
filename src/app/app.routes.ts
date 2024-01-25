@@ -25,11 +25,11 @@ export const routes: Routes =
                 // loadComponent: () => import('./dashboard/pages/main-view/main-view.component'),
                 component:ControlFlowComponent
             },
-            // {
-            //     path:'change-detection',
-            //     title:'Change Detection',
-            //     loadComponent: () => import('./dashboard/pages/change-detection/change-detection.component'),
-            // },
+            {
+                path:'change-detection',
+                title:'Change Detection',
+                loadComponent: () => import('./dashboard/pages/change-detection/change-detection.component'),
+            },
             // {
             //     path:'defer-options',
             //     title:'Defer Options',
