@@ -1,3 +1,8 @@
+/* @font-face {
+    font-family: ;
+    src: url();
+} */
+
 .div
 {
     /* background-color: 243,229,216; */
@@ -15,10 +20,11 @@
 
 .div-general
 {
-    background-color: aquamarine;
+    background-color: rgb(248, 248, 248);
     box-sizing: border-box;
     max-width: 500px;
     margin: 0;
+    border-radius: 7px;
 
     display: flex;
     flex-direction: column;
@@ -27,22 +33,33 @@
 
 .div-father
 {
-    margin-left: 2%;
-    margin-right: 3%;
-    /* margin-top: 2%; */
+    margin-left: 4%;
+    margin-right: 4%;
+    /* margin-top: 4%; */
     /* margin-bottom: 0%; */
 
     display: flex;
     flex-flow: column nowrap;
     
 }
-
+ /********************************************/
 .container-image
 {
     margin-top: 2%;
-    margin-bottom:1%
+    margin-bottom:1%;
 }   
 
+.container-image img
+{
+    border-radius: 7px;
+}
+
+#image
+{
+    margin-top: 4%; 
+     margin-bottom: 1%;
+}
+ /****************** 2 **************************/
 .contaier2
 {
     display: flex;
@@ -52,10 +69,36 @@
 
 #title2
 {
-   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+   font-family: 'Benjamin Franklin', Arial, sans-serif; 
+    /* font-family: 'Outfit-Light';
+    src: url('C:/Users/Ulises Yerandis/AppData/Local/Microsoft/Windows/Fonts/Outfit-Light.ttf'); */
+   font-weight: bold;
 }
+
+/* @font-face 
+{
+    font-family: 'Benjamin Franklin';
+    src: url('C:/Users/Ulises Yerandis/AppData/Local/Microsoft/Windows/Fonts/Benjamin Franklin.ttf');
+} */
 
 #text2
 {
     margin-top: 4%;
 }
+/******************** 3 ************************/
+#title3
+{
+    color: #aa547a;
+    /* text-indent: 10px; */
+}
+
+/******************** 4 ************************/
+
+#title4
+{
+    font-family: 'Madrid RR Medium', sans-serif;
+    color: #824832;
+}
+/******************** 5 ************************/
+
+/******************** 6 ************************/
