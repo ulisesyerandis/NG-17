@@ -18,6 +18,8 @@ import StudentListComponent from './dashboard/pages/student-list/student-list.co
 import ControlFlowComponent from './dashboard/pages/main-view/main-view.component';
 import { FormStudentComponent } from './dashboard/pages/form-student/form-student.component';
 import { ToastComponent } from '@shared/toast/toast/toast.component';
+import  SignUpComponent  from './dashboard/pages/challenges/sign-up/sign-up.component';
+import { CrowdfundComponent } from './dashboard/pages/challenges/crowdfund/crowdfund.component';
  
 export const appConfig: ApplicationConfig = 
 {
@@ -32,7 +34,7 @@ export const appConfig: ApplicationConfig =
       NoopAnimationsModule, MatPaginator, 
       ),
       FormComponent, StudentListComponent, ControlFlowComponent,
-      FormStudentComponent,ToastComponent
+      FormStudentComponent,ToastComponent,SignUpComponent, CrowdfundComponent,
   ],
 
 }

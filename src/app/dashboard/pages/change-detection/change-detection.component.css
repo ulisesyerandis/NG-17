@@ -3,6 +3,12 @@
     src: url();
 } */
 
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+
 .div
 {
     /* background-color: 243,229,216; */
@@ -15,18 +21,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
- 
+    padding: 20px;
 }
 
 .div-general
 {
     background-color: rgb(248, 248, 248);
     box-sizing: border-box;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0;
     border-radius: 7px;
 
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: column;
     justify-content: center;
 }
@@ -35,12 +42,43 @@
 {
     margin-left: 4%;
     margin-right: 4%;
-    /* margin-top: 4%; */
+    margin-top: 4%;
     /* margin-bottom: 0%; */
+    justify-content: center;
 
     display: flex;
     flex-flow: column nowrap;
-    
+    padding: 20px;
+}
+
+/* *{
+    border: 1px solid red; 
+    } */
+
+.item
+{
+    color: #824832; 
+    /* display: flex; */
+    /* align-items: center; */
+    /* background-color: yellowgreen;
+    padding: 10px;
+    justify-content: center; */
+        /* display:flex; */
+        /* gap: 10px; */
+        /* align-items: center; */
+}
+
+.li{
+    font-size: 16px;
+  }
+
+.text
+{
+    /* margin-left: 4%; */
+    color: black;
+    /* justify-content: center; */
+    /* margin: 10px; */
+    /* background-color: aqua; */
 }
  /********************************************/
 .container-image
@@ -60,6 +98,11 @@
      margin-bottom: 1%;
 }
  /****************** 2 **************************/
+#container2
+{
+    background-color: rgb(247, 233, 242);
+}
+
 .contaier2
 {
     display: flex;
@@ -86,19 +129,97 @@
     margin-top: 4%;
 }
 /******************** 3 ************************/
+.container3
+{
+    flex-flow: column nowrap;
+    /* flex-direction: column; */
+    /* display: flex    ; */
+    /* align-content: center;
+    justify-content: center; */
+}
+
 #title3
 {
     color: #aa547a;
     /* text-indent: 10px; */
+    /* margin-left: 15px; */
 }
 
-/******************** 4 ************************/
+#text3
+{
+    /* margin-left: 15px; */
+    /* align-items: center; */
+}
 
+#div3
+{
+    /* gap: 1; */
+}
+/******************** 4 ************************/
 #title4
 {
     font-family: 'Madrid RR Medium', sans-serif;
     color: #824832;
 }
-/******************** 5 ************************/
 
+.container4
+{
+    flex-flow: column nowrap;
+    /* display: list-item; */
+}
+/******************** 5 ************************/
+.container5
+{
+    /* margin-left: 0%; */
+    flex-flow: column nowrap;
+}
+
+#text5
+{
+    /* margin-left: 4%; */
+}
+
+#title5
+{
+    /* margin-bottom: 2%; */
+    color: #824832;
+}
 /******************** 6 ************************/
+.table2
+{
+   display: flex;
+   /* background-color: aqua; */
+}
+
+.tr2
+{
+    /* display: flex; */
+    flex-direction: column;
+}
+
+.th
+{
+    display: flex;
+    margin-right: 20px;
+    padding-right: 20px;
+}
+
+#table5
+{
+    padding: 20px;;
+}
+
+#text5
+{
+    margin-left: 0px;
+}
+
+#cell
+{
+    color: #824832;
+}
+
+#first-cell
+{
+    margin-right: 150px;
+}

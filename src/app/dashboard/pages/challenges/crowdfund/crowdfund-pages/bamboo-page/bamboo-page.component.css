@@ -1,0 +1,89 @@
+@import '../../../../../../../assets/styles/font-imports.scss';
+
+.main-container
+{
+    width: 100%;
+    padding: 30px;
+    padding-left: 90px;
+    padding-right: 90px;
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-page-container
+{
+    border: red 1px solid;
+    width: 37em;
+    height: 20em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title
+{
+    /* border: red 1px solid; */
+    font-family: 'Montserrat-ExtraBold', sans-serif;
+    font-size: 25px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.slogan-text
+{
+    /* border: red 1px solid; */
+    font-family: 'Montserrat-Black', sans-serif;
+    font-size: 15px;
+    color: gray;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;  
+}
+
+.button-container
+{
+    border: black 1px solid;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-back
+{
+    background: violet;
+    width: 13em;
+    border-radius: 45px;
+}
+
+.icon-bookmark-container
+{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 15px;
+}
+
+.money-container
+{
+    background: yellow;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

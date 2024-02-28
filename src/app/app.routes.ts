@@ -7,6 +7,9 @@ import DashboardComponent from './dashboard/dashboard.component';
 import findStudentComponent from './dashboard/pages/find-student/find-student.component';
 import { Component } from '@angular/core';
 import { FormStudentComponent } from './dashboard/pages/form-student/form-student.component';
+import  SignUpComponent  from './dashboard/pages/challenges/sign-up/sign-up.component';
+import  DashComponent  from './dashboard/pages/challenges/dashboard/dash/dash.component';
+import { CrowdfundComponent } from './dashboard/pages/challenges/crowdfund/crowdfund.component';
 
 export const routes: Routes = 
 [
@@ -29,6 +32,27 @@ export const routes: Routes =
                 path:'change-detection',
                 title:'Change Detection',
                 loadComponent: () => import('./dashboard/pages/change-detection/change-detection.component'),
+            },
+            {
+                path:'Signup',
+                title:'Signup',
+                // loadComponent: () => import('./dashboard/pages/challenges/sign-up.component'),
+                component:SignUpComponent
+            },
+            {
+                path:'defer-options',
+                    title:'Defer Options',
+                    loadComponent: () => import('./dashboard/pages/defer-options/defer-options.component')
+            },
+            {
+                path: 'dash',
+                title: 'Dash',
+                component: DashComponent
+            },
+            {
+                path: 'crowdfund',
+                title: 'Crowdfund',
+                component: CrowdfundComponent
             },
             // {
             //     path:'defer-options',

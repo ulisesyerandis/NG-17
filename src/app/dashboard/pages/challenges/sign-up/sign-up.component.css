@@ -1,0 +1,135 @@
+/* *{
+    border: 1px solid red; 
+    }  */
+
+    @media only screen and (max-width: 600px) {
+        body {
+          background-color: lightblue;
+        }
+      }
+
+.div-background
+{
+    width: 68%;
+    background-color: rgb(54, 56, 77);
+    padding: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.container
+{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: space-between;
+    background: white;
+    padding: 2%;
+    /* padding-right: 0%; */
+    /* border; */
+    border-width: 1px;
+    border-style: inset;
+    border-radius: 25px;
+    width: 83%;
+    height: auto;
+    flex-wrap: nowrap;
+}
+
+.subscribe
+{
+    /* background: yellow; */
+    border-style: solid;
+    border-color: red;
+    width: 485px;
+    height: 60%;
+    margin-right: 5%;
+    padding: 2%;
+    padding-right: 0%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* align-items: center; */
+    flex-wrap: nowrap;
+}
+
+.image
+{
+    /* background: blue; */
+    width: auto;
+    height: 60%;
+    /* height: max-content; */
+    /* border-color: green; */
+    flex-wrap: nowrap;
+    /* border-radius: 25px; */
+}
+
+h1
+{
+    flex-wrap: nowrap;
+    font-size: 50px;
+    color: rgb(54, 56, 77);
+    padding-top: 2%;
+    padding-left: 2%;
+}
+
+p
+{
+    flex-wrap: nowrap;
+    font-size: 20px;
+    color: rgb(54, 56, 77);
+    padding: 2%;
+    padding-right: 0%;
+}
+
+svg
+{
+    padding-right: 1%;
+}
+
+div
+{
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    color: rgb(54, 56, 77);
+    font-size: 20px;
+    padding: 1%;
+}
+
+h4
+{
+    flex-wrap: nowrap;
+    color: rgb(54, 56, 77);
+    padding-top: 1%;
+}
+
+input.rounded 
+{
+    border-width: 1px;
+    flex-wrap: nowrap;
+    height: 60px;
+    /* border-color: rgb(54, 56, 77); */
+    padding-left: 7%;
+  }
+
+.btn
+{
+    flex-wrap: nowrap;
+     height: 60px;
+    background: rgb(54, 56, 77);
+    color: white;
+    margin-top: 3%;
+    border-radius: 7px;
+}
+
+.test {
+    border-width: 1px;
+    border-style: inset;
+    border-color: red;
+    border-radius: 5px;
+  }
